@@ -1,0 +1,2 @@
+module CtaScheduleHelper
+end

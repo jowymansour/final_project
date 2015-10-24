@@ -1,0 +1,28 @@
+// Place all the styles related to the cta_schedule controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// GENERAL STYLING
+
+html, body {
+  background-color: #efefef;
+  font-family: 'Lato', serif;
+  font-weight: 300;
+  font-size: 200;
+}
+
+
+// NAVBAR
+
+.link-customized {
+  color: #444;
+}
+
+.navbar-brand {
+  font-size: 30px;
+}
+
+.navbar-nav {
+  font-size: 20px;
+
+}
