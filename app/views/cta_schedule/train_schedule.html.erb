@@ -1,0 +1,159 @@
+<div class="container">
+  <h1><%= @line.route_long_name %> </h1>
+
+  <div class="row">
+    <% @stations.each do |station| %>
+        <!-- Direction North -->
+        <% if station.DIRECTION_ID == "N" %>
+          <div class="col-md-6">
+            <% if @North == 0 %>
+              <div class="row">
+                  <h3>North</h3>
+                  <% @North = 1 %>
+              </div>
+            <% end %>
+            <div class="row">
+              <div class="col-md-11">
+                <a href="#" onclick="ShowSchedule(N_<%= station.STOP_ID %>)">
+                  <h5><%= station.STATION_NAME %></h5>
+                </a>
+
+                <div class="panel panel-default hidden_div" id="N_<%= station.STOP_ID %>">
+                  <div class="panel-body">
+                    <i class="fa fa-heart favorite_box fa-lg" onclick="addFavorite(N_<%= station.STOP_ID %>, this)"></i>
+                    <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(N_<%= station.STOP_ID %>)"></i>
+                    <h6>First Train - 11h06</h6>
+                    <h6>First Train - 11h06</h6>
+                    <h6>First Train - 11h06</h6>
+                    <h6>First Train - 11h06</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Direction SOUTH -->
+        <% if station.DIRECTION_ID == "S" %>
+          <div class="col-md-6">
+          <% if @South == 0 %>
+            <div class="row">
+                <h3>South</h3>
+                <% @South = 1 %>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col-md-11">
+              <a href="#" onclick="ShowSchedule(S_<%= station.STOP_ID %>)">
+                <h5><%= station.STATION_NAME %></h5>
+              </a>
+
+              <div class="panel panel-default hidden_div" id="S_<%= station.STOP_ID %>">
+                <div class="panel-body">
+                  <i class="fa fa-heart favorite_box fa-lg" onclick="addFavorite(S_<%= station.STOP_ID %>, this)"></i>
+                  <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(S_<%= station.STOP_ID %>)"></i>
+                  <h6>First Train - 11h06</h6>
+                  <h6>First Train - 11h06</h6>
+                  <h6>First Train - 11h06</h6>
+                  <h6>First Train - 11h06</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <% @stations.each do |station| %>
+        <!-- Direction East -->
+        <% if station.DIRECTION_ID == "E" %>
+          <div class="col-md-6">
+            <% if @East == 0 %>
+              <div class="row">
+                  <h3>East</h3>
+                  <% @East = 1 %>
+              </div>
+            <% end %>
+            <div class="row">
+              <div class="col-md-11">
+                <a href="#" onclick="ShowSchedule(E_<%= station.STOP_ID %>)">
+                  <h5><%= station.STATION_NAME %></h5>
+                </a>
+
+                <div class="panel panel-default hidden_div" id="E_<%= station.STOP_ID %>">
+                  <div class="panel-body">
+                    <i class="fa fa-heart favorite_box fa-lg" onclick="addFavorite(E_<%= station.STOP_ID %>, this)"></i>
+                    <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(E_<%= station.STOP_ID %>)"></i>
+                    <h6>First Train - 11h06</h6>
+                    <h6>First Train - 11h06</h6>
+                    <h6>First Train - 11h06</h6>
+                    <h6>First Train - 11h06</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Direction SOUTH -->
+        <% if station.DIRECTION_ID == "W" %>
+          <div class="col-md-6">
+          <% if @West == 0 %>
+            <div class="row">
+                <h3>West</h3>
+                <% @West = 1 %>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col-md-11">
+              <a href="#" onclick="ShowSchedule(W_<%= station.STOP_ID %>)">
+                <h5><%= station.STATION_NAME %></h5>
+              </a>
+
+              <div class="panel panel-default hidden_div" id="W_<%= station.STOP_ID %>">
+                <div class="panel-body">
+                  <i class="fa fa-heart favorite_box fa-lg" onclick="addFavorite(W_<%= station.STOP_ID %>, this)"></i>
+                  <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(W_<%= station.STOP_ID %>)"></i>
+                  <h6>First Train - 11h06</h6>
+                  <h6>First Train - 11h06</h6>
+                  <h6>First Train - 11h06</h6>
+                  <h6>First Train - 11h06</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+<script>
+
+  function ShowSchedule(div_to_show){
+    //RETRIEVE DATA
+
+
+    toggleClass(div_to_show,"hidden_div");
+  }
+  function addFavorite(shedule, favorite){
+    //RETRIEVE DATA
+
+    toggleClass(favorite,"added_favorite");
+  }
+
+  function toggleClass(element, className){
+    if (!element || !className){
+        return;
+    }
+    var classString = element.className, nameIndex = classString.indexOf(className);
+    if (nameIndex == -1) {
+        classString += ' ' + className;
+    }
+    else {
+        classString = classString.substr(0, nameIndex) + classString.substr(nameIndex+className.length);
+    }
+    element.className = classString;
+  }
+</script>

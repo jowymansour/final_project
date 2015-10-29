@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'cta_schedule#new_search'
   get '/transportation/request' => "cta_schedule#transportation_request"
+  get '/train/:id' => "cta_schedule#train_schedule"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

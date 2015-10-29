@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  STOP_ID: 1
+  DIRECTION_ID: MyString
+  DIRECTION_NUM: 1
+  STOP_NAME: MyString
+  STATION_NAME: MyString
+  STATION_DESCRIPTIVE_NAME: MyString
+  MAP_ID: MyString
+  ADA: false
+  RED: false
+  BLUE: false
+  G: false
+  BRN: false
+  P: false
+  Pexp: false
+  'Y': false
+  Pnk: false
+  O: false
+  LATITUDE: MyString
+  LONGITUDE: MyString
+
+two:
+  STOP_ID: 1
+  DIRECTION_ID: MyString
+  DIRECTION_NUM: 1
+  STOP_NAME: MyString
+  STATION_NAME: MyString
+  STATION_DESCRIPTIVE_NAME: MyString
+  MAP_ID: MyString
+  ADA: false
+  RED: false
+  BLUE: false
+  G: false
+  BRN: false
+  P: false
+  Pexp: false
+  'Y': false
+  Pnk: false
+  O: false
+  LATITUDE: MyString
+  LONGITUDE: MyString

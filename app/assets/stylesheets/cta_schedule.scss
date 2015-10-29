@@ -18,6 +18,9 @@ html, body {
   color: #444;
 }
 
+.underlined {
+text-decoration: underline;
+}
 .navbar-brand {
   font-size: 30px;
 }
@@ -25,5 +28,29 @@ html, body {
 .navbar-nav {
   font-size: 20px;
 
+}
+
+
+.close_box {
+  position: absolute;
+  top: 50px;
+  right: 30px;
+}
+
+.favorite_box {
+  position: absolute;
+  top: 50px;
+  right: 60px;
+  color: grey;
+}
+
+.added_favorite {
+  color: red;
+}
+
+.hidden_div {
+  visibility: hidden;
+  height:0px;
+  margin: 0px;
 }
 
