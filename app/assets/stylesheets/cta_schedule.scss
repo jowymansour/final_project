@@ -44,6 +44,12 @@ text-decoration: underline;
   color: grey;
 }
 
+.refresh_box{
+  position: absolute;
+  top: 50px;
+  right: 100px;
+}
+
 .added_favorite {
   color: red;
 }
@@ -54,3 +60,7 @@ text-decoration: underline;
   margin: 0px;
 }
 
+
+.time_result{
+  color: green;
+}
