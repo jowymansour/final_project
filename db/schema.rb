@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026031749) do
+ActiveRecord::Schema.define(version: 20151101191217) do
 
   create_table "train_stops", force: :cascade do |t|
     t.integer  "STOP_ID"
@@ -48,5 +48,20 @@ ActiveRecord::Schema.define(version: 20151026031749) do
   end
 
   add_index "transportations", ["route_id"], name: "index_transportations_on_route_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "rember_digest"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.datetime "oauth_expires_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

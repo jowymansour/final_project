@@ -1,0 +1,54 @@
+
+<div class="container text-center">
+
+  <!-- ERROR MESSAGES -->
+  <div class="row margin-top">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+  </div>
+
+  <!-- FACEBOOK LOGIN ! -->
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-4">
+      <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
+        <i class="fa fa-facebook"></i>
+        <span>Connect via Facebook</span>
+      </a>
+    </div>
+  </div>
+
+  <HR>
+  <h4>Or</h4>
+  <HR>
+
+  <!-- OTHER LOGIN ! -->
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(:session,  url: login_path, :html => {:class => "label-1"}) do |f| %>
+
+      <%= f.label :email, class: "label-1" %>
+      <%= f.email_field :email, class: "input-align form-control" %>
+
+      <%= f.label :password, class: "label-1" %>
+      <%= f.password_field :password, class: "input-align form-control" %>
+
+      <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
+        <div class="col-md-1">
+          <% f.label :remember_me, class: "checkbox inline" %>
+          <%= f.check_box :remember_me %>
+        </div>
+        <div class="col-md-5">
+          <span>Remember me on this computer</span>
+        </div>
+      </div>
+
+      <%= f.submit "Log in", class: "btn btn-primary input-align" %>
+      <% end %>
+
+      <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+  </div>
+  <div id="fb-root"></div>
+</div>
+

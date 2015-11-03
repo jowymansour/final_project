@@ -7,7 +7,7 @@
   width: 100%;
   height: 60px;
   vertical-align: top;
-  overflow: hidden;
+
 }
 
 .input__field {
@@ -37,7 +37,20 @@
   visibility: hidden;
 }
 
-  // Placeholder
+.input_low_margin {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#show_option {
+  margin-left: 2em;
+}
+
+.hidden {
+  visibility:hidden;
+}
+
+// Placeholder
 
 @mixin Input_placeholder(){
   color: rgba(106, 121, 137, 0.70);
@@ -73,4 +86,150 @@
 .div_result {
   margin-left: 15px;
 }
+
+
+//CUSTOM DROPDOWN2
+
+
+.wrapper-dropdown2 {
+    /* Size and position */
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 10px 10px 30px;
+
+    /* Styles */
+    background: #fff;
+    border: 1px solid silver;
+    cursor: pointer;
+    outline: none;
+}
+
+.wrapper-dropdown2:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -3px;
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #ffaa9f transparent;
+}
+
+.wrapper-dropdown2 .dropdown2 {
+    /* Size & position */
+    position: absolute;
+    top: 100%;
+    margin-top: 1px;
+    left: -1px;
+    right: -1px;
+
+    /* Styles */
+    background: white;
+    border: inherit;
+    border-top: none;
+    list-style: none;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+}
+
+/* Red lines: the pseudo-elements way */
+.wrapper-dropdown2 .dropdown2:before,
+.wrapper-dropdown2:before {
+    content: "";
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    border: 1px solid #ffaa9f;
+    border-top: none;
+    border-bottom: none;
+    z-index: 2;
+}
+
+/* Red lines: the gradients way */
+
+/*
+.wrapper-dropdown2 .dropdown2,
+.wrapper-dropdown2 {
+  background: linear-gradient(left, white 5%, #ffaa9f 5%, #ffaa9f 5.3%, white 5.3%, white 6.5%, #ffaa9f 6.5%, #ffaa9f 6.8%, white 6.8%);
+}
+
+.wrapper-dropdown2 .dropdown2 li:hover label {
+  background: linear-gradient(left, #f0F0F0 5%, #ffaa9f 5%, #ffaa9f 5.3%, #f0F0F0 5.3%, #f0F0F0 6.5%, #ffaa9f 6.5%, #ffaa9f 6.8%, #f0F0F0 6.8%);
+}
+*/
+
+.wrapper-dropdown2 .dropdown2 li {
+    position: relative; /* Enable absolute positioning for checkboxes */
+}
+
+.wrapper-dropdown2 .dropdown2 li label {
+    display: block;
+    padding: 10px 10px 10px 30px; /* Same padding as the button */
+    border-bottom: 1px dotted #1ccfcf;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.wrapper-dropdown2 .dropdown2 li:last-of-type label {
+    border: none;
+}
+
+.wrapper-dropdown2 .dropdown2 li input /* Checkboxes */ {
+    position: absolute;
+    display: block;
+    top: 50%;
+    margin-top: -8px;
+}
+
+/* Hover state */
+
+.wrapper-dropdown2 .dropdown2 li:hover label {
+    background: #f0f0f0;
+}
+
+/* Checked state */
+
+.wrapper-dropdown2 .dropdown2 li input:checked ~ label {
+    color: grey;
+    text-decoration: underline;
+}
+
+/* Active state */
+
+.wrapper-dropdown2.active:after {
+    border-width: 0 6px 6px 6px;
+}
+
+.wrapper-dropdown2.active .dropdown2 {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* No CSS3 support */
+
+.no-opacity       wrapper-dropdown2 .dropdown2,
+.no-pointerevents .wrapper-dropdown2 .dropdown2 {
+    display: none;
+    opacity: 1; /* If opacity support but no pointer-events support */
+    pointer-events: auto; /* If pointer-events support but no pointer-events support */
+}
+
+.no-opacity       .wrapper-dropdown2.active .dropdown2,
+.no-pointerevents .wrapper-dropdown2.active .dropdown2 {
+    display: block;
+}
+
+
 

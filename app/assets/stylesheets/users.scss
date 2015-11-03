@@ -1,0 +1,35 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* MIXIN */
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input, .input-align {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+.label-1 {
+  text-align: left;
+}
+
+
+.container_margin {
+
+  margin-top: 100px;
+}

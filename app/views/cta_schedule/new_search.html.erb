@@ -11,11 +11,11 @@
     </div>
   </div>
 
+  <!-- STATIONS NEAR MY ADDRESS -->
   <div class="row">
     <div class="col-md-offset-2 col-md-8">
       <div class="text-center">
-        <a class="link-customized underlined"><h4>Or search for Stations near your address!</h4></a>
-      </span>
+        <a class="link-customized underlined" href="/directions"><h4>Or look for a direction!</h4></a>
     </div>
   </div>
 
@@ -25,10 +25,21 @@
       <div id="trains"></div>
       <div id="bus"></div>
     </div>
-    <div id="favorites" class="col-md-offset-2 col-md-8">
-      <div class="text-center">
-        <h3> Have your favorite routes here! </h3>
-        <h4> Register or login now!</h4>
+
+    <!-- Favorites -->
+    <div clas="row">
+      <div id="favorites" class="col-md-offset-2 col-md-8">
+        <!-- IF  NOT LOGGED IN -->
+<!--         <div class="text-center">
+          <h3> Have your favorite routes here! </h3>
+          <h4> Register or login now!</h4>
+        </div> -->
+
+       <!--  IF LOGGED IN -->
+        <div class="text-center">
+          <h3> Your favorites</h3>
+        </div>
+        <%= render 'cta_schedule/favorite' %>
       </div>
     </div>
   </div>

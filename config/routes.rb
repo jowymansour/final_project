@@ -1,9 +1,21 @@
 Rails.application.routes.draw do
+
+
   root 'cta_schedule#new_search'
   get '/transportation/request' => "cta_schedule#transportation_request"
   get '/train/retrieve_data' => "cta_schedule#train_retrieve"
   get '/train/:id' => "cta_schedule#train_schedule"
+  get '/directions' => "cta_schedule#directions"
+  get '/search_directions' => "cta_schedule#search_directions"
 
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
+  get 'signup' => 'users#new'
+  get 'myaccount' => 'users#show'
+  get 'wait' => 'users#wait'
+
+  resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

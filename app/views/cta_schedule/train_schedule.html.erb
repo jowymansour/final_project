@@ -1,29 +1,34 @@
 <div class="container">
   <h1><%= @line.route_long_name %> </h1>
 
-  <div class="row">
+  <div class="row" id="all_schedule">
+    <div class="col-md-12">
+      <% @stations.each do |station| %>
+        <div class="row">
+          <div class="col-md-offset-1 col-md-5">
+            <a href="#" onclick="ShowSchedule(<%= station.MAP_ID %>)">
+              <h5><%= station.STATION_NAME %></h5>
+            </a>
+          </div>
           <div class="col-md-6">
-            <% @stations.each do |station| %>
-            <div class="row">
-              <div class="col-md-offset-1 col-md-11">
-                <a href="#" onclick="ShowSchedule(<%= station.MAP_ID %>)">
-                  <h5><%= station.STATION_NAME %></h5>
-                </a>
+              <div class="panel panel-default hidden_div" id="<%= station.MAP_ID %>">
+                <div class="panel-body">
+                  <i class="fa fa-heart favorite_box fa-lg" onclick="addFavorite(<%= station.MAP_ID %>, this)"></i>
+                  <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(<%= station.MAP_ID %>)"></i>
+                  <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= station.MAP_ID %>)"></i>
 
-                <div class="panel panel-default hidden_div" id="<%= station.MAP_ID %>">
-                  <div class="panel-body">
-                    <i class="fa fa-heart favorite_box fa-lg" onclick="addFavorite(<%= station.MAP_ID %>, this)"></i>
-                    <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(<%= station.MAP_ID %>)"></i>
-                    <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= station.MAP_ID %>)"></i>
-
+                  <div class="panel-header" id="header_<%= station.MAP_ID %>"></div>
+                  <div class="col-md-offset-1">
                     <div id="destination_1_<%= station.MAP_ID %>"></div>
                     <div id="destination_5_<%= station.MAP_ID %>"></div>
                   </div>
                 </div>
               </div>
-            </div>
-            <% end %>
           </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
 
 <script>
@@ -70,20 +75,24 @@
 
   //FUNCTION TO DELETE CONTENT OF THE DIV BEFORE RETRIEVING DATA
   function deleteContent(MapId) {
-    destination_5_div = document.getElementById("destination_5_" + MapId);
-    destination_1_div = document.getElementById("destination_1_" + MapId);
+    var divtoclear = new Array() ;
 
-    while (destination_5_div.firstChild) {
-      destination_5_div.removeChild(destination_5_div.firstChild);
+    divtoclear[0] = document.getElementById("destination_5_" + MapId);
+    divtoclear[1] = document.getElementById("destination_1_" + MapId);
+    divtoclear[2] = document.getElementById("header_" + MapId);
+
+    for (i=0;i<3;i++){
+      while (divtoclear[i].firstChild) {
+        divtoclear[i].removeChild(divtoclear[i].firstChild);
+      }
     }
-    while (destination_1_div.firstChild) {
-      destination_1_div.removeChild(destination_1_div.firstChild);
-    }
+
   }
 
   //FUNCTION TO RETRIEVE THE DATA
   function AjaxFetch(MapId) {
 
+    div_header = document.getElementById("header_" + MapId);
     destination_5_div = document.getElementById("destination_5_" + MapId);
     destination_1_div = document.getElementById("destination_1_" + MapId);
 
@@ -99,13 +108,23 @@
             var train = new Array();
             var h6 = new Array ();
             var span = new Array();
-            direction_1 = 0
-            direction_5 = 0
+            direction_1 = 0;
+            direction_5 = 0;
+            station_name = 0;
 
             for (i=0; i<list_of_results.length; i++) {
               train[i] = list_of_results[i];
 
-                //First add direction name if not already there !
+                //Add station name if not already there
+                if (station_name == 0) {
+                  var h4_station = document.createElement("h4");
+                  h4_station.appendChild(document.createTextNode(train[i]["staNm"]));
+                  div_header.insertBefore(h4_station, div_header.firstChild);
+                  station_name = 1;
+                }
+
+
+                // add direction name if not already there !
                 if (direction_1 == 0 && train[i]["trDr"] == "1") {
                   var h5_1 = document.createElement("h5");
                   h5_1.appendChild(document.createTextNode(train[i]["stpDe"]));
@@ -153,4 +172,6 @@
           }
         });
       }
+
+      $("#all_schedule").on('click', 'a', false);
 </script>

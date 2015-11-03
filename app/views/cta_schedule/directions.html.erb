@@ -1,0 +1,82 @@
+<div class="container">
+
+  <!-- SEARCH INPUT -->
+  <div class="row">
+    <div class="col-md-offset-2 col-md-7">
+      <form action="/search_destinations">
+
+        <!-- DEPARTURE AND ARRIVAL INPUT -->
+        <div class="form-group input input_low_margin">
+          <input class="input__field arrow_submit" type="text" id="departure_address" name="departure_address"
+            placeholder="Type your departure address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your departure address'" value="<%= @search_query %>" />
+        </div>
+        <div class="form-group input input_low_margin">
+          <input class="input__field arrow_submit" type="text" id="arrival_address" name="arrival_address"
+            placeholder="Type your arrival address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your arrival address'" value="<%= @search_query %>" />
+          <button type="submit" class="fa fa-arrow-right fa-2x arrow"></button>
+        </div>
+
+
+        <!-- OPTIONS -->
+        <a id="show_option" onclick='$("#options").toggleClass("hidden")'>Show/Hide options</a>
+
+        <div class="hidden" id="options">
+
+          <!-- FIRST OPTION: TYPE OF TRANSPORTAITON -->
+          <div class="col-md-offset-1 col-md-5">
+            <div class="wrapper-dropdown2" >
+              <div onclick='$("#transportlist").toggleClass("hidden")'>
+                Type of transport
+              </div>
+              <ul class="dropdown2 hidden" id="transportlist">
+                <li>
+                  <input type="checkbox" id="transp-1" name="transp-1" value="bus"><label for="transp-1">Bus</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="transp-2" name="transp-2" value="train"><label for="transp-2">CTA Train</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="transp-3" name="transp-3" value="Metra"><label for="transp-3">Metra</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- SECOND OPTION: Preferred routes -->
+          <div class="col-md-offset-1 col-md-5">
+            <div class="wrapper-dropdown2" >
+              <div onclick='$("#preference").toggleClass("hidden")'>
+                Preferred
+              </div>
+              <ul class="dropdown2 hidden" id="preference">
+                <li><input type="radio" id="pref-1" name="pref-1" value="bus">
+                  <label for="pref-1">Fastest route</label>
+                </li>
+                <li>
+                  <input type="radio" id="pref-2" name="pref-2" value="train"><label for="pref-2">Fewer transfers</label>
+                </li>
+                <li>
+                  <input type="radio" id="pref-3" name="pref-3" value="T-rex"><label for="pref-3">less walking</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- SEARCH RESULTS -->
+
+  <div class="row">
+    <% if @query != 0 %>
+      <% if @message.blank? %>
+        return station
+      <% else %>
+        <h4 class="text-center"><%= @message %></h4>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

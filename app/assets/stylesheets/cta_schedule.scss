@@ -33,20 +33,19 @@ text-decoration: underline;
 
 .close_box {
   position: absolute;
-  top: 50px;
+
   right: 30px;
 }
 
 .favorite_box {
   position: absolute;
-  top: 50px;
+
   right: 60px;
   color: grey;
 }
 
-.refresh_box{
+.refresh_box {
   position: absolute;
-  top: 50px;
   right: 100px;
 }
 
@@ -61,6 +60,23 @@ text-decoration: underline;
 }
 
 
-.time_result{
+.time_result {
   color: green;
 }
+
+
+/* STATIONS */
+
+.arrow {
+  position: absolute;
+  right: 0;
+  border: none;
+  background: none;
+  color: rgba(0,0,0,0.4);
+  top: 0;
+
+}
+.arrow_submit {
+  padding-right: 50px;
+}
+

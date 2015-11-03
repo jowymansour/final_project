@@ -29,4 +29,19 @@ class CtaScheduleController < ApplicationController
     render :json => apiResults_JSON
   end
 
+  def directions
+    @query = 0
+  end
+
+  def search_directions
+    @query = 1
+    @search_query = params[:search_stations]
+    if @search_query.blank?
+      @message = "No station found, try again"
+    end
+
+    render 'stations'
+
+  end
+
 end

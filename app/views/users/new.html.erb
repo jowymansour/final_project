@@ -1,0 +1,28 @@
+<div class="container text-center">
+  <h1 class="top-title">Sign up</h1>
+          <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@user,  :html => {:class => "label-1"}) do |f| %>
+
+        <%# render 'shared/error_messages', object: f.object %>
+        <%= f.label :name, class: "label-1" %>
+        <%= f.text_field :name, class: "input-align form-control" %>
+
+        <%= f.label :email, class: "label-1" %>
+        <%= f.email_field :email, class: "input-align form-control" %>
+
+        <%= f.label :password, class: "label-1" %>
+        <%= f.password_field :password, class: "input-align form-control" %>
+
+        <%= f.label :password_confirmation, "Confirmation", class: "label-1" %>
+        <%= f.password_field :password_confirmation, class: "input-align form-control" %>
+
+        <%= f.submit "Create my account", class: "btn btn-primary input-align" %>
+         <p>alreay signed up? <%= link_to "Login", login_path %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
