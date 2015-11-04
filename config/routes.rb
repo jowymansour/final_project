@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/transportation/request' => "cta_schedule#transportation_request"
   get '/train/retrieve_data' => "cta_schedule#train_retrieve"
   get '/train/:id' => "cta_schedule#train_schedule"
+  get '/bus/retrieve_data' => "cta_schedule#bus_retrieve"
+  get '/bus/:id' => "cta_schedule#bus_schedule"
   get '/directions' => "cta_schedule#directions"
   get '/search_directions' => "cta_schedule#search_directions"
 
