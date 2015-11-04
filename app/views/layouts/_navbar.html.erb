@@ -17,8 +17,13 @@
           <li><a class="link-customized" href="/directions">Direction</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+        <% if logged_in? %>
+          <li><%= link_to "Edit my account", edit_user_path(current_user), class: "link-customized" %></li>
+          <li><%= link_to "Log out", logout_path, method: "delete", class: "link-customized" %></li>
+        <% else %>
           <li><a class="link-customized" href="/login">Log In</a></li>
           <li><a class="link-customized" href="/signup">Sign up</a></li>
+        <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </nav>

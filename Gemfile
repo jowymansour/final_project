@@ -25,7 +25,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'jquery-turbolinks'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+
+#to hash user password
+gem 'bcrypt', '~> 3.1.7'
+
+#To login via Facebook
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

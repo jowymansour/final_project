@@ -14,10 +14,12 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   get 'signup' => 'users#new'
-  get 'myaccount' => 'users#show'
-  get 'wait' => 'users#wait'
+  get 'auth/:provider/callback', to: 'sessions#facebook'
 
   resources :users
+
+  # If no route match
+  #get "*path" => redirect("/")
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
