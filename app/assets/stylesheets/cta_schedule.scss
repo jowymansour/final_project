@@ -39,8 +39,13 @@ text-decoration: underline;
 
 .favorite_box {
   position: absolute;
-
   right: 60px;
+  color: grey;
+}
+
+.favorite_box_homepage{
+  position: absolute;
+  right: 30px;
   color: grey;
 }
 
@@ -78,5 +83,13 @@ text-decoration: underline;
 }
 .arrow_submit {
   padding-right: 50px;
+}
+
+/* FAVORITES */
+
+.favorite_panel{
+  height: 250px;
+  overflow-y: auto;
+
 }
 
