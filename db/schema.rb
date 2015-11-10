@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105030138) do
+ActiveRecord::Schema.define(version: 20151106170409) do
 
   create_table "favorites", force: :cascade do |t|
     t.string   "type_transp"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20151105030138) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "route_id"
   end
 
   create_table "train_stops", force: :cascade do |t|

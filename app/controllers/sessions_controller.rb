@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-
+  #Create a session if user is properly authentificated
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
     end
   end
 
+  #Create a session if user is properly authentificated via facebook
   def facebook
     user = User.from_omniauth(env["omniauth.auth"])
     if user
@@ -29,7 +30,7 @@ class SessionsController < ApplicationController
   end
 
 
-
+  #Destroy the session (log-out) of the user
   def destroy
     log_out if logged_in?
     flash[:info] = 'You are successfully disconnected, see you soon!'

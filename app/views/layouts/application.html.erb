@@ -18,22 +18,26 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 
-
   <!-- Custom CSS -->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
   <!-- Custom fonts -->
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>
+
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 </head>
+
 <body class="<%= controller_name %> <%= action_name %>">
 <%= render 'layouts/navbar' %>
 
-<% flash.each do |message_type, message| %>
-<div class="alert alert-<%= message_type %>"><%= message %></div>
-<% end %>
+  <% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
 
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

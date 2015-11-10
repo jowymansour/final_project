@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   attr_accessor :remember_token
 
+  #First we have to make sure, the user doesn't already exist and every information is correctly entered (no same e-mail, and all e-mail recorded in downcase for example)
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: {maximum: 50}
@@ -9,13 +10,14 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: {minimum: 6}, allow_blank: true
 
-  # Returns the hash digest of the given string.
+  # Returns the hash digest of the given string (To hash password/remember tokens before saving them)
   def User.digest(string)
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                     BCrypt::Engine.cost
       BCrypt::Password.create(string, cost: cost)
   end
 
+  #Methods for the "remember" checkbox
   def User.new_token
     SecureRandom.urlsafe_base64
   end
@@ -36,6 +38,7 @@ class User < ActiveRecord::Base
       update_attribute(:rember_digest, nil)
     end
 
+  #If the Facebook user is not registered yet in database, we add him
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider

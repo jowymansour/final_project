@@ -15,4 +15,4 @@
 //= require jquery_ujs
 //= require jquery-readyselector
 //= require turbolinks
-//= require_tree .
+//= require_tree ./sitewide

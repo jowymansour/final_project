@@ -1,4 +1,5 @@
 module SessionsHelper
+#Some methods to help manage users current status (log-in, log-out, remember, forget, currently logged-in or not..)
 
   def log_in(user)
     session[:user_id] = user.id
@@ -20,6 +21,14 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+  end
+
   def forget(user)
     user.forget
     cookies.delete(:user_id)
@@ -36,15 +45,6 @@ module SessionsHelper
     user.remember
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
-  end
-
-  def redirect_back_or(default)
-    redirect_to(session[:forwarding_url] || default)
-    session.delete(:forwarding_url)
-  end
-
-  def store_location
-    session[:forwarding_url] = request.url if request.get?
   end
 
 

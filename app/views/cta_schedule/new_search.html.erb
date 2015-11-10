@@ -43,12 +43,12 @@
           <div class="col-md-6">
             <div class="panel panel-default favorite_panel" id="<%= favorite.station_id %>">
               <div class="panel-body">
-                <i class="fa fa-heart favorite_box_homepage fa-lg added_favorite" onclick="addFavorite(<%= favorite.station_id %>,this)"></i>
+                <i class="fa fa-heart favorite_box_homepage fa-lg added_favorite" onclick="add_remove_Favorite(<%= favorite.station_id %>, this, '<%= favorite.type_transp %>', '<%= favorite.route_id %>')"></i>
 
                 <div class="panel-header" id="header_<%= favorite.station_id %>" style="">
                   <h4><%= @line_name[favorite.id] %></h4>
                 </div>
-                <div class="col-md-offset-1 col-md-11">
+                <div class="col-md-12">
                   <!-- If the favorite is a bus -->
                   <% if favorite.type_transp == "bus" %>
                     <%=raw @text_of_predictions_bus[favorite.id] %>
@@ -85,3 +85,6 @@
 
 </div>
 
+<!-- LOAD PAGE SPECIFIC JAVASCRIPT -->
+<%= javascript_include_tag 'cta_schedule/HomeSpecific/AjaxSearch.js'  %>
+<%= javascript_include_tag 'cta_schedule/AddRemoveFavorite.js'  %>

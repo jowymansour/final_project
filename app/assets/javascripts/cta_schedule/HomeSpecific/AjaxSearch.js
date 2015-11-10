@@ -1,8 +1,5 @@
 // This file is required to search automatically when something is typed in the Input
 
-//This prevent the script from being launched in another page then the ones it is made for
-$(".cta_schedule.new_search").ready(function (){
-
   //look if a key is pressed in the input and if the input is not empty
   //==> If so we take out the previous results and go for new ones (via function FindLine)
   $("#search").keyup(function (e) {
@@ -95,5 +92,3 @@ $(".cta_schedule.new_search").ready(function (){
     a.appendChild(h4)
     div1.appendChild(a);
   }
-
-});

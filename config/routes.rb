@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   get '/train/:id' => "cta_schedule#train_schedule"
   get '/bus/retrieve_data' => "cta_schedule#bus_retrieve"
   get '/bus/:id' => "cta_schedule#bus_schedule"
-  get '/directions' => "cta_schedule#directions"
-  get '/search_directions' => "cta_schedule#search_directions"
+  get '/directions' => "directions#directions"
+  get '/search_directions' => "directions#search_directions"
+  get 'add_favorite' => "cta_schedule#add_favorite"
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
