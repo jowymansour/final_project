@@ -1,0 +1,5 @@
+id,name,email,password_digest,rember_digest,provider,uid,oauth_token,created_at,updated_at,oauth_expires_at
+2,Mansour,jowymansour@gmail.com,$2a$10$URjmnzCapJaX/mcv0EnTmuQdV7vjCoidRuV6tuhf/3ZW3Kzvp4hGW,,,,,2015-11-04 05:20:44.516979,2015-11-04 05:20:44.516979,
+3,Jowy,jordi92500@hotmail.fr,$2a$10$18U8e5m3nhQpnHzoeDEaluybpiuOhnf/Cbz/IvFirKIrSD5Vs2xOG,,,,,2015-11-04 05:27:11.954967,2015-11-05 02:30:36.157734,
+4,Jowy Doui Mansour,jowymansour1@gmail.com,$2a$10$BgiXVI9rkfGx/tnrtYDGsuBPxBTLsEM3oblzXIJ0BWhHvgIH/8JwS,,facebook,10156208092190483,,2015-11-04 06:07:36.755168,2015-11-04 06:09:58.497050,
+5,Jowy Mansour,jowy.mansour@gmail.com,$2a$10$Q7XbA8pxBezLYDA3WTCSEePkEtj3hEaUtydmbjkKFDsKB7nDQFVuK,,,,,2015-11-06 20:01:08.329069,2015-11-06 20:01:08.329069,

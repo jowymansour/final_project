@@ -7,7 +7,6 @@ class UpdateTransportationColumns < ActiveRecord::Migration
     add_column :transportations, :route_url,:string
     add_column :transportations, :route_color,:string
     add_column :transportations, :route_text_color,:string
-    remove_column :transportations, :type_transport
     remove_column :transportations, :route
     add_index :transportations, :route_id
   end

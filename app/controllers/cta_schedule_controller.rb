@@ -139,7 +139,7 @@ class CtaScheduleController < ApplicationController
   def train_schedule
     route_id = params[:id]
     @line = Transportation.find_by(route_id: route_id)
-    @stations = TrainStop.where(route_id => "t").order("STATION_NAME")
+    @stations = TrainStop.where(route_id => "t")
   end
 
   #Method to retrieve next trains predictions (see private - train_api)

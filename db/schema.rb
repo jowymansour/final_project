@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151106170409) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "favorites", force: :cascade do |t|
     t.string   "type_transp"
     t.string   "station_id"
@@ -45,6 +48,7 @@ ActiveRecord::Schema.define(version: 20151106170409) do
   end
 
   create_table "transportations", force: :cascade do |t|
+    t.string   "type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "route_id"
@@ -56,7 +60,7 @@ ActiveRecord::Schema.define(version: 20151106170409) do
     t.string   "route_text_color"
   end
 
-  add_index "transportations", ["route_id"], name: "index_transportations_on_route_id"
+  add_index "transportations", ["route_id"], name: "index_transportations_on_route_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -71,6 +75,6 @@ ActiveRecord::Schema.define(version: 20151106170409) do
     t.datetime "oauth_expires_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

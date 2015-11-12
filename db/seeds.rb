@@ -138,7 +138,6 @@
 # end
 
 
-  Favorite.create([
-  {type_transp: "train", station_id: "41120", user_id: 3}
-  ])
-
+  # Favorite.create([
+  # {type_transp: "train", station_id: "41120", user_id: 3}
+  # ])
