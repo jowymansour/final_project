@@ -2,20 +2,20 @@
 	font-weight: normal;
 	font-style: normal;
 	font-family: 'codropsicons';
-	src: url('/assets/codropsicons/codropsicons.eot');
-	src: url('/assets/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
-		url('/assets/codropsicons/codropsicons.woff') format('woff'),
-		url('/assets/codropsicons/codropsicons.ttf') format('truetype'),
-		url('/assets/codropsicons/codropsicons.svg#codropsicons') format('svg');
+	src: font-url('codropsicons/codropsicons.eot');
+	src: font-url('codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+		font-url('codropsicons/codropsicons.woff') format('woff'),
+		font-url('codropsicons/codropsicons.ttf') format('truetype'),
+		font-url('codropsicons/codropsicons.svg#codropsicons') format('svg');
 }
 
 @font-face {
 	font-family: 'linecons';
-	src:url('/assets/linecons/linecons.eot?-kux0c3');
-	src:url('/assets/linecons/linecons.eot?#iefix-kux0c3') format('embedded-opentype'),
-		url('/assets/linecons/linecons.woff?-kux0c3') format('woff'),
-		url('/assets/linecons/linecons.ttf?-kux0c3') format('truetype'),
-		url('/assets/linecons/linecons.svg?-kux0c3#linecons') format('svg');
+	src:font-url('linecons/linecons.eot?-kux0c3');
+	src:font-url('linecons/linecons.eot?#iefix-kux0c3') format('embedded-opentype'),
+		font-url('linecons/linecons.woff?-kux0c3') format('woff'),
+		font-url('linecons/linecons.ttf?-kux0c3') format('truetype'),
+		font-url('linecons/linecons.svg?-kux0c3#linecons') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
