@@ -129,8 +129,9 @@ class CtaScheduleController < ApplicationController
 
   #method called by ajax to retrieve the lines that matche the text
   def transportation_request
-    line_request = params[:line]
-    lines =  Transportation.where("route_long_name like ? OR route_short_name like ?", "%#{line_request}%", "%#{line_request}%")
+    line_request = params[:line].downcase
+    lines =  Transportation.where("LOWER(route_long_name) LIKE ? OR LOWER(route_short_name) LIKE ?", "%#{line_request}%", "%#{line_request}%")
+
 
     render :json => lines
   end
