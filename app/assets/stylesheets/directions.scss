@@ -23,16 +23,6 @@
 }
 
 .options:hover, .options:focus, .options:active {
-  -webkit-animation-name: hvr-back-pulse;
-  animation-name: hvr-back-pulse;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-delay: 0.5s;
-  animation-delay: 0.5s;
-  -webkit-animation-timing-function: linear;
-  animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-  background-color: #e6e6e6;
-
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
 }
+

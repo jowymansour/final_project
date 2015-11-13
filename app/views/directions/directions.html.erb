@@ -74,9 +74,16 @@
       <% if @error == 0 %>
         <div class="row">
           <div class="col-md-offset-2 col-md-8">
-            <h4>From <%= @routes.first.legs[0].start_address  %></h4>
-            <h4>To <%= @routes.first.legs[0].end_address  %></h4>
+          <dl>
+          <div class="col-md-offset-1 col-md-5">
+            <h4><dt>From:</dt> <dd><%= @routes.first.legs[0].start_address  %></dd></h4>
+          </div>
+          <div class="col-md-5">
+            <h4><dt>To:</dt>   <dd><%= @routes.first.legs[0].end_address  %></dd>  </h4>
+          </div>
+
               <%= render partial: 'directions/route', collection: @routes %>
+          </dl>
           </div>
         </div>
       <% else %>
