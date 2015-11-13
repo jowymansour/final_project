@@ -1,0 +1,75 @@
+<% step_count= 0 %>
+<div class="alternative <%= route_counter + 1 %>">
+  <div class="col-md-12">
+    <div class="panel panel-default no-margin options">
+
+      <!-- WHAT IS SHOWN WHEN CLOSED -->
+      <div class="panel-header col-md-12" onclick="$('#option-<%= route_counter + 1 %>').toggle()">
+        <div class="col-md-2"><h5>Alternative <%= route_counter + 1 %></h5></div>
+        <div class="col-md-2"><h5><%= route.legs[0].duration.text %></h5></div>
+        <div class="col-md-8">
+          <h5>via
+            <% route.legs[0].steps.each do |step| %>
+             <%= step_count == 0 ? "" : " > " %>
+              <% case step.travel_mode %>
+                <% when "WALKING" %>
+                  <%= image_tag "directions/walk.png", class: "direction-icon" %>
+                <% when "TRANSIT" %>
+                  <% if step.transit_details.line.vehicle.name == "Bus" %>
+                    <%= image_tag "directions/bus.png", class: "direction-icon" %>
+                    <%= step.transit_details.line.short_name %>
+                  <% else %>
+                    <%= image_tag "directions/subway.png", class: "direction-icon" %>
+                    <%= step.transit_details.line.name %>
+                  <% end %>
+              <% end %>
+              <% step_count = 1 %>
+            <% end%>
+          </h5>
+        </div>
+      </div>
+
+      <!-- WHAT IS SHOWN WHEN OPEN -->
+      <div class="panel-body">
+        <div id="option-<%= route_counter + 1 %>" style="display:none;">
+          <div class="col-md-12">
+            <% route.legs[0].steps.each do |step| %>
+              <div <% if step.steps %>onclick="$(this).find('.expended').toggle()"<%end%>>
+                <h5>
+                  <% case step.travel_mode %>
+                    <% when "WALKING" %>
+                      <%= image_tag "directions/walk.png", class: "direction-icon" %>
+                    <% when "TRANSIT" %>
+                      <% if step.transit_details.line.vehicle.name == "Bus" %>
+                        <%= image_tag "directions/bus.png", class: "direction-icon" %>
+                        <%= step.transit_details.line.short_name %>
+                      <% else %>
+                        <%= image_tag "directions/subway.png", class: "direction-icon" %>
+                        <%= step.transit_details.line.name %>
+                      <% end %>
+                  <% end %>
+                  <%= step.html_instructions %> (<%= step.duration.text %>)
+                  <% if step.steps %><i class="flaticon-expand38"></i><% end%>
+                </h5>
+
+                <div class="expended" style="display:none;">
+                  <div class="row">
+                    <div class="col-md-offset-1 col-md-11">
+                      <% if step.steps %>
+                        <% step.steps.each do |step_2| %>
+                            <h5><%= step_2.duration.text %> - <%= raw step_2.html_instructions %></h5>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+
+                <HR>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

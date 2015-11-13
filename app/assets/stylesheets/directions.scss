@@ -1,0 +1,38 @@
+// Place all the styles related to the cta_schedule controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// GENERAL STYLING
+.no-margin {
+  margin: 0;
+}
+
+.results {
+  margin-top: 20px;
+}
+
+.direction-icon {
+  width: 20px;
+  height: auto;
+}
+
+.expend {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+.options:hover, .options:focus, .options:active {
+  -webkit-animation-name: hvr-back-pulse;
+  animation-name: hvr-back-pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background-color: #e6e6e6;
+
+}

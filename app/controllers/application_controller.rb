@@ -6,5 +6,6 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
   include CtaScheduleHelper
+  include DirectionsHelper
 
 end

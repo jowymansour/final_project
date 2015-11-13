@@ -3,7 +3,7 @@
   <!-- SEARCH INPUT -->
   <div class="row">
     <div class="col-md-offset-2 col-md-7">
-      <form action="/search_destinations">
+      <form action="/search_directions">
 
         <!-- DEPARTURE AND ARRIVAL INPUT -->
         <div class="form-group input input_low_margin">
@@ -70,13 +70,18 @@
   <!-- SEARCH RESULTS -->
 
   <div class="row">
-    <% if @query != 0 %>
-      <% if @message.blank? %>
-        return station
+    <% if @query == 1 %>
+      <% if @error == 0 %>
+        <div class="row">
+          <div class="col-md-offset-2 col-md-8">
+            <h4>From <%= @routes.first.legs[0].start_address  %></h4>
+            <h4>To <%= @routes.first.legs[0].end_address  %></h4>
+              <%= render partial: 'directions/route', collection: @routes %>
+          </div>
+        </div>
       <% else %>
         <h4 class="text-center"><%= @message %></h4>
       <% end %>
     <% end %>
   </div>
-
 </div>
