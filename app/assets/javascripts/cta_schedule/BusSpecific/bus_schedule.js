@@ -14,7 +14,9 @@
     element.className = classString;
   }
 
-  function ShowSchedule(stpid){
+  //FUNCTION TO RETRIEVE BUS DATA
+  function ShowSchedule(stpid, route){
+
     //RETRIEVE DATA
     div_to_show = document.getElementById(stpid);
 
@@ -22,7 +24,7 @@
     if (div_to_show.getAttribute("class","panel panel-default hidden_div")){
 
       // we go fetch the data
-      AjaxFetch(stpid);
+      AjaxFetch(stpid, route);
     }
     toggleClass(div_to_show,"hidden_div");
   }
@@ -43,18 +45,20 @@
   }
 
   //FUNCTION TO RETRIEVE THE DATA
-  function AjaxFetch(stpid) {
+  function AjaxFetch(stpid, route) {
     div_header = document.getElementById("header_" + stpid);
     destination_div = document.getElementById("destination_" + stpid);
 
     //we first delete what is currently in the div
     deleteContent(stpid);
+
+    //Then we delete the first letter of stopid which was just to avoid mistake
     stopid = stpid.toString().substring(1);
 
     $.ajax({
       url: "/../bus/retrieve_data",
       cache: false,
-      data: {stpid : stopid},
+      data: {stpid : stopid, rt : route},
       success: function(data){
         var list_of_results = data["bustime_response"]["prd"];
         var bus = new Array();

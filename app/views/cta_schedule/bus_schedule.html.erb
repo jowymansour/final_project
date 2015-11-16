@@ -15,7 +15,7 @@
           <% stations["bustime_response"]["stop"].each do |station| %>
             <div class="row">
               <div class="col-md-offset-1">
-                <a href="#" onclick="ShowSchedule(<%= dirnb.to_s + station["stpid"] %>)">
+                <a href="#" onclick="ShowSchedule(<%= dirnb.to_s + station["stpid"] %>, <%= @line.route_id %>)">
                   <h5><%= station["stpnm"] %></h5>
                 </a>
               </div>
@@ -23,7 +23,7 @@
                   <div class="panel panel-default hidden_div" id="<%= dirnb.to_s + station["stpid"] %>">
                     <div class="panel-body">
                       <i class="fa fa-heart favorite_box fa-lg <%= logged_in? ? bus_favorite?(station["stpid"]) : '' %>" onclick="add_remove_Favorite(<%= station["stpid"] %>, this, 'bus','<%= @line.route_id %>')"></i>
-                      <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(<%= dirnb.to_s + station["stpid"] %>)"></i>
+                      <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(<%= dirnb.to_s + station["stpid"] %>, <%= @line.route_id %>)"></i>
                       <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= dirnb.to_s + station["stpid"] %>)"></i>
 
                       <div class="panel-header" id="header_<%= dirnb.to_s + station["stpid"] %>"><%= station["stpnm"] %></div>

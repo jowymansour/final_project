@@ -30,7 +30,7 @@ class CtaScheduleController < ApplicationController
         if favorite.type_transp == "bus"
 
           # We get back all the predictions for that particular favorite
-          predictions[favorite.id] = bus_api(favorite.station_id)["bustime_response"]["prd"]
+          predictions[favorite.id] = bus_api(favorite.station_id, favorite.route_id)["bustime_response"]["prd"]
 
           #if there is no prediction for now
           if predictions[favorite.id].nil?
@@ -175,7 +175,8 @@ class CtaScheduleController < ApplicationController
   #Method to retrieve next trains predictions (see private - train_api)
   def bus_retrieve
     stpid = params[:stpid]
-    apiResults_JSON = bus_api(stpid).to_json
+    route = params[:rt]
+    apiResults_JSON = bus_api(stpid, route).to_json
 
     render :json => apiResults_JSON
   end
@@ -251,10 +252,11 @@ class CtaScheduleController < ApplicationController
   end
 
   #Private method to retrieve prediction of specific bus station
-  def bus_api(stpid)
+  def bus_api(stpid, route)
     url_safe_stpid = URI.encode(stpid)
+    url_safe_route = URI.encode(route)
     apiKey = "UPGw2J5PBxNnF967CAMyHygeB"
-    apiLink = "http://www.ctabustracker.com/bustime/api/v1/getpredictions?key=#{apiKey}&stpid=#{url_safe_stpid}"
+    apiLink = "http://www.ctabustracker.com/bustime/api/v1/getpredictions?key=#{apiKey}&stpid=#{url_safe_stpid}&rt=#{url_safe_route}"
     apiResults = open(apiLink).read
     return Hash.from_xml(apiResults)
   end
