@@ -103,4 +103,18 @@ text-decoration: underline;
 }
 
 
+@media (max-width: 330px) {
+  .navbar-brand {
+    font-size: 20px;
+  }
+
+  .input {
+    margin: 0;
+  }
+
+  .directions {
+    visibility: hidden;
+    height: 0;
+  }
+}
 

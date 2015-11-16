@@ -1,29 +1,30 @@
-<nav class="navbar" role="navigation">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <%= link_to "My CTA Scheduler", root_url, { :class=>"navbar-brand link-customized", method: :get } %>
-      </div>
+<nav class="navbar">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <%= link_to "My CTA Scheduler", root_url, { :class=>"navbar-brand link-customized", method: :get } %>
+  </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="navbar-collapse collapse" id="navbar">
-        <ul class="nav navbar-nav navbar-left">
-          <li><a class="link-customized" href="/">Schedule</a></li>
-          <li><a class="link-customized" href="/directions">Direction</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
-          <li><%= link_to "Edit my account", edit_user_path(current_user), class: "link-customized" %></li>
-          <li><%= link_to "Log out", logout_path, method: "delete", class: "link-customized" %></li>
-        <% else %>
-          <li><a class="link-customized" href="/login">Log In</a></li>
-          <li><a class="link-customized" href="/signup">Sign up</a></li>
-        <% end %>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </nav>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li><a class="link-customized" href="/">Schedule</a></li>
+      <li><a class="link-customized" href="/directions">Direction</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    <% if logged_in? %>
+      <li><%= link_to "Edit my account", edit_user_path(current_user), class: "link-customized" %></li>
+      <li><%= link_to "Log out", logout_path, method: "delete", class: "link-customized" %></li>
+    <% else %>
+      <li><a class="link-customized" href="/login">Log In</a></li>
+      <li><a class="link-customized" href="/signup">Sign up</a></li>
+    <% end %>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+
+</nav>
