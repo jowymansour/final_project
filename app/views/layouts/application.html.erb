@@ -31,7 +31,8 @@
 </head>
 
 <body class="<%= controller_name %> <%= action_name %>">
-  <% if controller_name != "directions" && action_name != "schedule" %>
+
+  <% if action_name != "schedule" || controller_name != "directions" %>
     <%= render 'layouts/navbar' %>
   <% end %>
 
