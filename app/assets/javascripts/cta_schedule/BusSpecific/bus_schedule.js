@@ -81,12 +81,9 @@
               arrival_time = bus["prdtm"].replace(" ","T").replace(pattern,'$1-$2-$3');
               departure_time = bus["tmstmp"].replace(" ","T").replace(pattern,'$1-$2-$3');
 
-              number_of_seconds = new Date(arrival_time) - new Date(departure_time);
+              Time_now = new Date(departure_time);
+              number_of_seconds = new Date(arrival_time) - Time_now;
               number_of_minutes = number_of_seconds / (60*1000);
-
-              console.log("minutes:" + number_of_minutes);
-              console.log("arrival time:" + new Date(arrival_time));
-              console.log("search time:" + new Date(departure_time));
 
               bus_nb = "bus #" + bus["vid"] + " (to " + bus["des"] + ") - ";
               time_to_bus = number_of_minutes + " minutes";
@@ -117,12 +114,9 @@
               number_of_seconds = new Date(arrival_time) - new Date(departure_time);
               number_of_minutes = number_of_seconds / (60*1000);
 
-              console.log("minutes:" + number_of_minutes);
-              console.log("arrival time:" + new Date(arrival_time));
-              console.log("search time:" + new Date(departure_time));
-
               bus_nb = "bus #" + bus[i]["vid"] + " (to " + bus[i]["des"] + ") - ";
               time_to_bus = number_of_minutes + " minutes";
+
               h6[i] = document.createElement("h6");
               span[i] = document.createElement("span");
 
@@ -134,6 +128,23 @@
 
               h6[i].appendChild(span[i]);
 
+              // TIME now if it is the first result
+              if (i == 0) {
+                depart = new Date(departure_time);
+                depart.setHours(depart.getHours());
+                hours_UTC = depart.getUTCHours();
+                minutes = depart.getMinutes();
+
+                AM_PM = (hours_UTC >= 12) ? "PM" : "AM";
+                hours = (hours_UTC > 12) ? hours_UTC-12 : hours_UTC;
+                minutes = (minutes >=10) ? minutes : "0" + minutes;
+
+                Time = "Searched at " + hours + ":" + minutes + " " + AM_PM ;
+
+                h5 = document.createElement("h5");
+                h5.appendChild(document.createTextNode(Time));
+                destination_div.appendChild(h5);
+              }
               //Then add the result to the DOM
               destination_div.appendChild(h6[i]);
           }

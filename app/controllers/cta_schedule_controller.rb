@@ -13,6 +13,7 @@ class CtaScheduleController < ApplicationController
       #Variables initialization
       predictions = {}
       @line_name = {}
+      @time_departure = {}
       @text_of_predictions_bus = {}
       @text_of_predictions_train_5 = {}
       @text_of_predictions_train_1 = {}
@@ -65,6 +66,14 @@ class CtaScheduleController < ApplicationController
                   <span class="time_result">' + waiting_time.to_i.to_s + ' minutes </span>
                 </h6>
               '
+              #Time of search
+              hour = Time.parse(departure).hour
+              min =  Time.parse(departure).min
+              am_pm = (hour >= 12) ? "PM" : "AM"
+              hour = (hour >= 12) ? hour - 12 : hour
+              min = (min >= 10) ? min.to_s : "0" + min.to_s
+
+              @time_departure[favorite.id] = 'Searched at: ' + hour.to_s + ':' + min + am_pm ;
             end
 
             #Set up of header text (only possible if prediction != 0)
@@ -115,9 +124,18 @@ class CtaScheduleController < ApplicationController
                 @text_of_predictions_train_5[favorite.id] = @text_of_predictions_train_5[favorite.id] + '
                   <h6 class="train_results">train #' + prediction["rn"] + ' - <span class="time_result">' + waiting_time.to_i.to_s + ' minutes</span></h6>'
               end
+
+              #Time of search
+              hour = Time.parse(departure).hour
+              min =  Time.parse(departure).min
+              am_pm = (hour >= 12) ? "PM" : "AM"
+              hour = (hour >= 12) ? hour - 12 : hour
+              min = (min >= 10) ? min.to_s : "0" + min.to_s
+
+              @time_departure[favorite.id] = 'Searched at: ' + hour.to_s + ':' + min + am_pm ;
             end
 
-            #Set up of header text for trian
+            #Set up of header text for train
             line = Transportation.find_by(route_id: array_of_predictions[favorite.id][0]["rt"])
             @line_name[favorite.id] = line.route_long_name
             @line_name[favorite.id] = @line_name[favorite.id] + " - " + array_of_predictions[favorite.id][0]["staNm"]
