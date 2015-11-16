@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   get 'auth/:provider/callback', to: 'sessions#facebook'
 
+  get '/schedule' => "directions#schedule"
   resources :users
 
   # If no route match

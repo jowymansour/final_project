@@ -31,8 +31,9 @@
 </head>
 
 <body class="<%= controller_name %> <%= action_name %>">
-
-  <%= render 'layouts/navbar' %>
+  <% if controller_name != "directions" && action_name != schedule %>
+    <%= render 'layouts/navbar' %>
+  <% end %>
 
   <% flash.each do |message_type, message| %>
   <div class="alert alert-<%= message_type %>"><%= message %></div>

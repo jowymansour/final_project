@@ -74,8 +74,14 @@
 
                   <!-- ADD MAP HERE -->
                 </div>
-                <HR>
+
               </div>
+              <% if step.travel_mode == "TRANSIT" %>
+                <h6><a onclick="window.open('schedule', 'newwindow', 'width=300, height=250'); return false;">
+                  get next predictions
+                </a></h6>
+              <% end %>
+              <HR>
             <% end %>
           </div>
         </div>

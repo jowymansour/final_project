@@ -39,4 +39,7 @@ class DirectionsController < ApplicationController
       render 'directions'
   end
 
+  def schedule
+  end
+
 end
