@@ -12,12 +12,12 @@ class DirectionsController < ApplicationController
   def search_directions
     @query = 1
     @error = 0
-    departure_address = params[:departure_address]
-    arrival_address = params[:arrival_address]
+    @departure_address = params[:departure_address]
+    @arrival_address = params[:arrival_address]
 
-    if departure_address != "" && arrival_address != ""
-      url_safe_dep = URI.encode(departure_address)
-      url_safe_arr = URI.encode(arrival_address)
+    if @departure_address != "" && @arrival_address != ""
+      url_safe_dep = URI.encode(@departure_address)
+      url_safe_arr = URI.encode(@arrival_address)
 
       apiLink = "https://maps.googleapis.com/maps/api/directions/json?origin=#{url_safe_dep}&destination=#{url_safe_arr}&mode=transit&alternatives=true"
 

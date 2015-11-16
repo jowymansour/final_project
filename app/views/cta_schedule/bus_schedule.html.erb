@@ -21,12 +21,16 @@
               </div>
               <div class="col-md-10">
                   <div class="panel panel-default hidden_div" id="<%= dirnb.to_s + station["stpid"] %>">
+
                     <div class="panel-body">
+                        <!-- All the icons -->
                       <i class="fa fa-heart favorite_box fa-lg <%= logged_in? ? bus_favorite?(station["stpid"]) : '' %>" onclick="add_remove_Favorite(<%= station["stpid"] %>, this, 'bus','<%= @line.route_id %>')"></i>
                       <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(<%= dirnb.to_s + station["stpid"] %>, <%= @line.route_id %>)"></i>
                       <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= dirnb.to_s + station["stpid"] %>)"></i>
 
-                      <div class="panel-header" id="header_<%= dirnb.to_s + station["stpid"] %>"><%= station["stpnm"] %></div>
+                      <!-- The content - bus predictions -->
+                      <div id="header_<%= dirnb.to_s + station["stpid"] %>"><%= station["stpnm"] %></div>
+
                       <div class="col-md-offset-1">
                         <div id="destination_<%= dirnb.to_s + station["stpid"] %>"></div>
                       </div>

@@ -112,9 +112,13 @@ text-decoration: underline;
     margin: 0;
   }
 
-  .directions {
+  .directions_link {
     visibility: hidden;
     height: 0;
+  }
+
+  .bus_results{
+      margin-top: 25px;
   }
 }
 
