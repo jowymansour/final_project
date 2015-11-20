@@ -107,36 +107,37 @@ class CtaScheduleController < ApplicationController
 
             #If there is at least one prediction ==> We arrange the data
             array_of_predictions[favorite.id].each do |prediction|
+              if prediction["rt"] == favorite.route_id
+               #Generate waiting time
+                departure = prediction["prdt"]
+                arrival = prediction["arrT"]
+                waiting_time = (Time.parse(arrival) - Time.parse(departure))/(60)
 
-             #Generate waiting time
-              departure = prediction["prdt"]
-              arrival = prediction["arrT"]
-              waiting_time = (Time.parse(arrival) - Time.parse(departure))/(60)
+                #Create the HTML for prediction's results [two different variable depending on the direction]
+                if prediction["trDr"] == "1"
+                  @direction_1 = prediction["stpDe"]
+                  @text_of_predictions_train_1[favorite.id] = @text_of_predictions_train_1[favorite.id] + '
+                    <h6 class="train_results">train #' + prediction["rn"] + ' - <span class="time_result">' + waiting_time.to_i.to_s + ' minutes</span></h6>'
 
-              #Create the HTML for prediction's results [two different variable depending on the direction]
-              if prediction["trDr"] == "1"
-                @direction_1 = prediction["stpDe"]
-                @text_of_predictions_train_1[favorite.id] = @text_of_predictions_train_1[favorite.id] + '
-                  <h6 class="train_results">train #' + prediction["rn"] + ' - <span class="time_result">' + waiting_time.to_i.to_s + ' minutes</span></h6>'
+                elsif prediction["trDr"] == "5"
+                  @direction_5 = prediction["stpDe"]
+                  @text_of_predictions_train_5[favorite.id] = @text_of_predictions_train_5[favorite.id] + '
+                    <h6 class="train_results">train #' + prediction["rn"] + ' - <span class="time_result">' + waiting_time.to_i.to_s + ' minutes</span></h6>'
+                end
 
-              elsif prediction["trDr"] == "5"
-                @direction_5 = prediction["stpDe"]
-                @text_of_predictions_train_5[favorite.id] = @text_of_predictions_train_5[favorite.id] + '
-                  <h6 class="train_results">train #' + prediction["rn"] + ' - <span class="time_result">' + waiting_time.to_i.to_s + ' minutes</span></h6>'
+                #Time of search
+                hour = Time.parse(departure).hour
+                min =  Time.parse(departure).min
+                am_pm = (hour >= 12) ? "PM" : "AM"
+                hour = (hour >= 12) ? hour - 12 : hour
+                min = (min >= 10) ? min.to_s : "0" + min.to_s
+
+                @time_departure[favorite.id] = 'Searched at: ' + hour.to_s + ':' + min + am_pm ;
               end
-
-              #Time of search
-              hour = Time.parse(departure).hour
-              min =  Time.parse(departure).min
-              am_pm = (hour >= 12) ? "PM" : "AM"
-              hour = (hour >= 12) ? hour - 12 : hour
-              min = (min >= 10) ? min.to_s : "0" + min.to_s
-
-              @time_departure[favorite.id] = 'Searched at: ' + hour.to_s + ':' + min + am_pm ;
             end
 
             #Set up of header text for train
-            line = Transportation.find_by(route_id: array_of_predictions[favorite.id][0]["rt"])
+            line = Transportation.find_by(route_id: favorite.route_id)
             @line_name[favorite.id] = line.route_long_name
             @line_name[favorite.id] = @line_name[favorite.id] + " - " + array_of_predictions[favorite.id][0]["staNm"]
           end
@@ -165,6 +166,7 @@ class CtaScheduleController < ApplicationController
   def train_retrieve
     mapid = params[:mapid]
     apiResults_JSON = train_api(mapid).to_json
+
     render :json => apiResults_JSON
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106170409) do
+ActiveRecord::Schema.define(version: 20151120163630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,18 +29,18 @@ ActiveRecord::Schema.define(version: 20151106170409) do
     t.integer  "STOP_ID"
     t.string   "DIRECTION_ID"
     t.string   "STOP_NAME"
-    t.string   "STATION_NAME"
-    t.string   "STATION_DESCRIPTIVE_NAME"
+    t.string   "station_name"
+    t.string   "station_descriptive_name"
     t.string   "MAP_ID"
     t.boolean  "ADA"
-    t.boolean  "RED"
-    t.boolean  "BLUE"
+    t.boolean  "Red"
+    t.boolean  "Blue"
     t.boolean  "G"
-    t.boolean  "BRN"
+    t.boolean  "Brn"
     t.boolean  "P"
     t.boolean  "Pexp"
     t.boolean  "Y"
-    t.boolean  "Pnk"
+    t.boolean  "Pink"
     t.boolean  "O"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false

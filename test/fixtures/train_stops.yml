@@ -5,8 +5,8 @@ one:
   DIRECTION_ID: MyString
   DIRECTION_NUM: 1
   STOP_NAME: MyString
-  STATION_NAME: MyString
-  STATION_DESCRIPTIVE_NAME: MyString
+  station_name: MyString
+  station_descriptive_name: MyString
   MAP_ID: MyString
   ADA: false
   RED: false
@@ -26,8 +26,8 @@ two:
   DIRECTION_ID: MyString
   DIRECTION_NUM: 1
   STOP_NAME: MyString
-  STATION_NAME: MyString
-  STATION_DESCRIPTIVE_NAME: MyString
+  station_name: MyString
+  station_descriptive_name: MyString
   MAP_ID: MyString
   ADA: false
   RED: false

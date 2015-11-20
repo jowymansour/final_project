@@ -11,5 +11,5 @@
 <%= javascript_include_tag 'cta_schedule/TrainSpecific/train_schedule.js'  %>
 <script>
   var TablePrediction = <%=raw @train_prediction.to_json %>;
-  ConstructTable(TablePrediction, <%= station.MAP_ID %>);
+  ConstructTable(TablePrediction, <%= station.MAP_ID %>, "<%= line.route_id %>");
 </script>

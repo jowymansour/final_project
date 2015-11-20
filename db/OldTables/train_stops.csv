@@ -1,4 +1,4 @@
-id,STOP_ID,DIRECTION_ID,STOP_NAME,STATION_NAME,STATION_DESCRIPTIVE_NAME,MAP_ID,ADA,RED,BLUE,G,BRN,P,Pexp,Y,Pnk,O,created_at,updated_at,Location
+id,STOP_ID,DIRECTION_ID,STOP_NAME,station_name,station_descriptive_name,MAP_ID,ADA,RED,BLUE,G,BRN,P,Pexp,Y,Pnk,O,created_at,updated_at,Location
 299,30161,E,18th (Loop-bound),18th,18th (Pink Line),40830,t,f,f,f,f,f,f,f,t,f,2015-10-30 14:41:47.224216,2015-10-30 14:41:47.224216,{41.857908;-87.669147}
 300,30022,N,35th/Archer (Loop-bound),35th/Archer,35th/Archer (Orange Line),40120,t,f,f,f,f,f,f,f,f,t,2015-10-30 14:41:47.238442,2015-10-30 14:41:47.238442,{41.829353;-87.680622}
 301,30213,N,35-Bronzeville-IIT (Harlem-bound),35th-Bronzeville-IIT,35th-Bronzeville-IIT (Green Line),41120,t,f,f,t,f,f,f,f,f,f,2015-10-30 14:41:47.241591,2015-10-30 14:41:47.241591,{41.831677;-87.625826}

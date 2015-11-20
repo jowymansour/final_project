@@ -55,11 +55,10 @@ class DirectionsController < ApplicationController
 
     #Si c'est un train!
     if @type_transport == "SUBWAY"
-      #line_db = Transportation.find_by(:route_long_name => line) not necessary here
-      if stop.chomp(')') != stop
-        stop_train = stop.chomp(')') + " Line)"
-      end
-      @stop_db = TrainStop.find_by(STATION_DESCRIPTIVE_NAME:  stop_train)
+      @line_db = Transportation.find_by(:route_long_name => line)
+      stop_train = stop.split(' (')[0]
+
+      @stop_db = TrainStop.where("station_name ILIKE ?",  "%#{stop_train}%").where(@line_db.route_id.upcase => "t").first
 
       if @stop_db.nil?
         @message = "No Prediction can be found for this stop #{stop_train}"

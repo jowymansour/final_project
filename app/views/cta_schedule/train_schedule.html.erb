@@ -6,15 +6,15 @@
       <% @stations.each do |station| %>
         <div class="row">
           <div class="col-md-offset-1 col-md-5">
-            <a href="#" onclick="ShowSchedule(<%= station.MAP_ID %>)">
-              <h5><%= station.STATION_NAME %></h5>
+            <a href="#" onclick="ShowSchedule(<%= station.MAP_ID %>, '<%= @line.route_id %>')">
+              <h5><%= station.station_name %></h5>
             </a>
           </div>
           <div class="col-md-6">
               <div class="panel panel-default hidden_div" id="<%= station.MAP_ID %>">
                 <div class="panel-body">
                   <i class="fa fa-heart favorite_box fa-lg <%= logged_in? ? train_favorite?(station) : '' %>" onclick="add_remove_Favorite(<%= station.MAP_ID %>, this, 'train', '<%= @line.route_id %>')"></i>
-                  <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(<%= station.MAP_ID %>)"></i>
+                  <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(<%= station.MAP_ID %>, '<%= @line.route_id %>')"></i>
                   <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= station.MAP_ID %>)"></i>
 
                   <div class="panel-header" id="header_<%= station.MAP_ID %>"></div>

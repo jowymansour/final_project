@@ -86,7 +86,7 @@
                 <% end %>
                 <% stop = step.transit_details.departure_stop.name.html_safe %>
 
-                <h6><a onclick='window.open("schedule?type=<%= type_transport %>&line=<%= line %>&stop=<%=raw stop.gsub("'","") %>", "newwindow", "width=300, height=250"); return false;'>
+                <h6><a class="transport-link" data-transport="<%= type_transport%>" data-line="<%= line %>" data-stop="<%=raw stop %>">
                   get next predictions
                 </a></h6>
               <% end %>
@@ -98,3 +98,11 @@
     </div>
   </div>
 </div>
+<script>
+  $(".transport-link").click(function(e){
+    e.preventDefault;
+    link = "schedule?type=" + $(this).data('transport') + "&line=" + $(this).data('line') + "&stop=" + $(this).data('stop');
+    window.open(link, "newwindow", "width=300, height=250");
+
+  })
+</script>
