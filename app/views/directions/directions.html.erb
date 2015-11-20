@@ -27,17 +27,17 @@
             <div class="col-md-offset-1 col-md-5">
               <div class="wrapper-dropdown2" >
                 <div onclick='$("#transportlist").toggleClass("hidden")'>
-                  Type of transport
+                  Favorite type of transport
                 </div>
                 <ul class="dropdown2 hidden" id="transportlist">
                   <li>
-                    <input type="checkbox" id="transp-1" name="transp-1" value="bus"><label for="transp-1">Bus</label>
+                    <input type="checkbox" id="transp-1" name="bus_transit" value="bus"><label for="transp-1">Bus</label>
                   </li>
                   <li>
-                    <input type="checkbox" id="transp-2" name="transp-2" value="train"><label for="transp-2">CTA Train</label>
+                    <input type="checkbox" id="transp-2" name="train_transit" value="subway"><label for="transp-2">CTA Train</label>
                   </li>
                   <li>
-                    <input type="checkbox" id="transp-3" name="transp-3" value="Metra"><label for="transp-3">Metra</label>
+                    <input type="checkbox" id="transp-3" name="metra_transit" value="train"><label for="transp-3">Metra/Other trains</label>
                   </li>
                 </ul>
               </div>
@@ -50,14 +50,14 @@
                   Preferred
                 </div>
                 <ul class="dropdown2 hidden" id="preference">
-                  <li><input type="radio" id="pref-1" name="preffered" value="bus">
+                  <li><input type="radio" id="pref-1" name="preferred" value="">
                     <label for="pref-1">Fastest route</label>
                   </li>
                   <li>
-                    <input type="radio" id="pref-2" name="preffered" value="train"><label for="pref-2">Fewer transfers</label>
+                    <input type="radio" id="pref-2" name="preferred" value="fewer_transfers"><label for="pref-2">Fewer transfers</label>
                   </li>
                   <li>
-                    <input type="radio" id="pref-3" name="preffered" value="T-rex"><label for="pref-3">less walking</label>
+                    <input type="radio" id="pref-3" name="preferred" value="less_walking"><label for="pref-3">less walking</label>
                   </li>
                 </ul>
               </div>

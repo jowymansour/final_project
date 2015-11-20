@@ -85,8 +85,9 @@
                   <% line = step.transit_details.line.name %>
                 <% end %>
                 <% stop = step.transit_details.departure_stop.name.html_safe %>
-
-                <h6><a class="transport-link" data-transport="<%= type_transport%>" data-line="<%= line %>" data-stop="<%=raw stop %>">
+                <% lat = step.transit_details.departure_stop.location.lat %>
+                <% lng = step.transit_details.departure_stop.location.lng %>
+                <h6><a class="transport-link" data-transport="<%= type_transport %>" data-line="<%= line %>" data-stop="<%=raw stop %>" data-lat="<%= lat %>" data-lng="<%= lng %>">
                   get next predictions
                 </a></h6>
               <% end %>
@@ -101,7 +102,7 @@
 <script>
   $(".transport-link").click(function(e){
     e.preventDefault;
-    link = "schedule?type=" + $(this).data('transport') + "&line=" + $(this).data('line') + "&stop=" + $(this).data('stop');
+    link = "schedule?type=" + $(this).data('transport') + "&line=" + $(this).data('line') + "&stop=" + $(this).data('stop') + "&lat=" + $(this).data('lat') + "&lng=" + $(this).data('lng');
     window.open(link, "newwindow", "width=300, height=250");
 
   })

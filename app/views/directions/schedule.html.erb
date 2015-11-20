@@ -2,7 +2,7 @@
   <% if @type_transport == "SUBWAY" %>
     <%= render partial: 'directions/train', :locals => {:train_prediction => @train_prediction, :station => @stop_db, :line => @line_db } %>
   <% elsif @type_transport =="BUS" %>
-
+    <%= render partial: 'directions/bus', :locals => {:bus_prediction => @bus_prediction, :stop_id => @stop_id, :line => @line } %>
   <% else %>
   <h3> <%= @message %> </h3>
   <% end %>

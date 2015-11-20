@@ -29,7 +29,7 @@
                       <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= dirnb.to_s + station["stpid"] %>)"></i>
 
                       <!-- The content - bus predictions -->
-                      <div id="header_<%= dirnb.to_s + station["stpid"] %>"><%= station["stpnm"] %></div>
+                      <div class="header_box" id="header_<%= dirnb.to_s + station["stpid"] %>"><%= station["stpnm"] %></div>
 
                       <div class="col-md-offset-1">
                         <div id="destination_<%= dirnb.to_s + station["stpid"] %>"></div>

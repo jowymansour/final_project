@@ -46,8 +46,6 @@
 
   //FUNCTION TO RETRIEVE THE DATA
   function AjaxFetch(stpid, route) {
-    div_header = document.getElementById("header_" + stpid);
-    destination_div = document.getElementById("destination_" + stpid);
 
     //we first delete what is currently in the div
     deleteContent(stpid);
@@ -61,9 +59,6 @@
       data: {stpid : stopid, rt : route},
       success: function(data){
         var list_of_results = data["bustime_response"]["prd"];
-        var bus = new Array();
-        var h6 = new Array ();
-        var span = new Array();
 
 
         //IF NO SERVICE SCHEDULED
@@ -71,85 +66,107 @@
               text = data["bustime_response"]["error"]["msg"] + " for that stop"
               h6 = document.createElement("h6");
               h6.appendChild(document.createTextNode(text));
-              destination_div.appendChild(h6);
-
-        } else if (!list_of_results[0]) {
-          //IF there is only one element, there is an error because list_of_Results is not a hash
-          // We make the same computation as down but for just one element.
-              bus = list_of_results;
-              var pattern = /(\d{4})(\d{2})(\d{2})/;
-              arrival_time = bus["prdtm"].replace(" ","T").replace(pattern,'$1-$2-$3');
-              departure_time = bus["tmstmp"].replace(" ","T").replace(pattern,'$1-$2-$3');
-
-              Time_now = new Date(departure_time);
-              number_of_seconds = new Date(arrival_time) - Time_now;
-              number_of_minutes = number_of_seconds / (60*1000);
-
-              bus_nb = "bus #" + bus["vid"] + " (to " + bus["des"] + ") - ";
-              time_to_bus = number_of_minutes + " minutes";
-              h6 = document.createElement("h6");
-              span = document.createElement("span");
-
-              h6.appendChild(document.createTextNode(bus_nb));
-              h6.setAttribute("class","bus_results");
-
-              span.appendChild(document.createTextNode(time_to_bus));
-              span.setAttribute("class","time_result");
-
-              h6.appendChild(span);
-
-              //Then add the result to the DOM
+              destination_div = document.getElementById("destination_" + stpid);
               destination_div.appendChild(h6);
 
         } else {
-
-          for (i=0; i<list_of_results.length; i++) {
-            bus[i] = list_of_results[i];
-
-              //Then compute the result
-              var pattern = /(\d{4})(\d{2})(\d{2})/;
-              arrival_time = bus[i]["prdtm"].replace(" ","T").replace(pattern,'$1-$2-$3');
-              departure_time = bus[i]["tmstmp"].replace(" ","T").replace(pattern,'$1-$2-$3');
-
-              number_of_seconds = new Date(arrival_time) - new Date(departure_time);
-              number_of_minutes = number_of_seconds / (60*1000);
-
-              bus_nb = "bus #" + bus[i]["vid"] + " (to " + bus[i]["des"] + ") - ";
-              time_to_bus = number_of_minutes + " minutes";
-
-              h6[i] = document.createElement("h6");
-              span[i] = document.createElement("span");
-
-              h6[i].appendChild(document.createTextNode(bus_nb));
-              h6[i].setAttribute("class","bus_results");
-
-              span[i].appendChild(document.createTextNode(time_to_bus));
-              span[i].setAttribute("class","time_result");
-
-              h6[i].appendChild(span[i]);
-
-              // TIME now if it is the first result
-              if (i == 0) {
-                depart = new Date(departure_time);
-                depart.setHours(depart.getHours());
-                hours_UTC = depart.getUTCHours();
-                minutes = depart.getMinutes();
-
-                AM_PM = (hours_UTC >= 12) ? "PM" : "AM";
-                hours = (hours_UTC > 12) ? hours_UTC-12 : hours_UTC;
-                minutes = (minutes >=10) ? minutes : "0" + minutes;
-
-                Time = "Searched at " + hours + ":" + minutes + " " + AM_PM ;
-
-                h5 = document.createElement("h5");
-                h5.appendChild(document.createTextNode(Time));
-                destination_div.appendChild(h5);
-              }
-              //Then add the result to the DOM
-              destination_div.appendChild(h6[i]);
-          }
+          ConstructTable(list_of_results, stpid);
         }
       }
     });
   }
 
+function ConstructTable(list_of_results, stpid){
+  div_header = document.getElementById("header_" + stpid);
+  destination_div = document.getElementById("destination_" + stpid);
+  var bus = new Array();
+  var h6 = new Array ();
+  var span = new Array();
+
+  if (!list_of_results[0]) {
+    //IF there is only one element, there is an error because list_of_Results is not a hash
+    // We make the same computation as down but for just one element.
+      bus = list_of_results;
+      var pattern = /(\d{4})(\d{2})(\d{2})/;
+      arrival_time = bus["prdtm"].replace(" ","T").replace(pattern,'$1-$2-$3');
+      departure_time = bus["tmstmp"].replace(" ","T").replace(pattern,'$1-$2-$3');
+
+      Time_now = new Date(departure_time);
+      number_of_seconds = new Date(arrival_time) - Time_now;
+      number_of_minutes = number_of_seconds / (60*1000);
+
+      bus_nb = "bus #" + bus["vid"] + " (to " + bus["des"] + ") - ";
+      time_to_bus = number_of_minutes + " minutes";
+      h6 = document.createElement("h6");
+      span = document.createElement("span");
+
+      h6.appendChild(document.createTextNode(bus_nb));
+      h6.setAttribute("class","bus_results");
+
+      span.appendChild(document.createTextNode(time_to_bus));
+      span.setAttribute("class","time_result");
+
+      h6.appendChild(span);
+
+      //Then add the result to the DOM
+      destination_div.appendChild(h6);
+
+      //Same for header
+      h4 = document.createElement("h4");
+      h4.appendChild(document.createTextNode(bus["stpnm"]));
+      div_header.appendChild(h4);
+
+  } else {
+
+    for (i=0; i<list_of_results.length; i++) {
+      bus[i] = list_of_results[i];
+
+      //Then compute the result
+      var pattern = /(\d{4})(\d{2})(\d{2})/;
+      arrival_time = bus[i]["prdtm"].replace(" ","T").replace(pattern,'$1-$2-$3');
+      departure_time = bus[i]["tmstmp"].replace(" ","T").replace(pattern,'$1-$2-$3');
+
+      number_of_seconds = new Date(arrival_time) - new Date(departure_time);
+      number_of_minutes = number_of_seconds / (60*1000);
+
+      bus_nb = "bus #" + bus[i]["vid"] + " (to " + bus[i]["des"] + ") - ";
+      time_to_bus = number_of_minutes + " minutes";
+
+      h6[i] = document.createElement("h6");
+      span[i] = document.createElement("span");
+
+      h6[i].appendChild(document.createTextNode(bus_nb));
+      h6[i].setAttribute("class","bus_results");
+
+      span[i].appendChild(document.createTextNode(time_to_bus));
+      span[i].setAttribute("class","time_result");
+
+      h6[i].appendChild(span[i]);
+
+      // TIME now if it is the first result
+      if (i == 0) {
+        depart = new Date(departure_time);
+        depart.setHours(depart.getHours());
+        hours_UTC = depart.getUTCHours();
+        minutes = depart.getMinutes();
+
+        AM_PM = (hours_UTC >= 12) ? "PM" : "AM";
+        hours = (hours_UTC > 12) ? hours_UTC-12 : hours_UTC;
+        minutes = (minutes >=10) ? minutes : "0" + minutes;
+
+        Time = "Searched at " + hours + ":" + minutes + " " + AM_PM ;
+
+        h5 = document.createElement("h5");
+        h5.appendChild(document.createTextNode(Time));
+        destination_div.appendChild(h5);
+
+        // header if first one
+        h4 = document.createElement("h4");
+        h4.appendChild(document.createTextNode(bus[i]["stpnm"]));
+        div_header.appendChild(h4);
+      }
+      //Then add the result to the DOM
+      destination_div.appendChild(h6[i]);
+    }
+  }
+}
