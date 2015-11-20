@@ -77,7 +77,16 @@
 
               </div>
               <% if step.travel_mode == "TRANSIT" %>
-                <h6><a onclick="window.open('schedule', 'newwindow', 'width=300, height=250'); return false;">
+
+                <% type_transport = step.transit_details.line.vehicle.type %>
+                <% if type_transport == "BUS" %>
+                  <% line = step.transit_details.line.short_name %>
+                <% else %>
+                  <% line = step.transit_details.line.name %>
+                <% end %>
+                <% stop = step.transit_details.departure_stop.name.html_safe %>
+
+                <h6><a onclick='window.open("schedule?type=<%= type_transport %>&line=<%= line %>&stop=<%=raw stop.gsub("'","") %>", "newwindow", "width=300, height=250"); return false;'>
                   get next predictions
                 </a></h6>
               <% end %>

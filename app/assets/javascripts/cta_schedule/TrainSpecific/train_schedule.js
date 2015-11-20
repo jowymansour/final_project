@@ -31,10 +31,6 @@
   //FUNCTION TO RETRIEVE THE DATA
   function AjaxFetch(MapId) {
 
-    div_header = document.getElementById("header_" + MapId);
-    destination_5_div = document.getElementById("destination_5_" + MapId);
-    destination_1_div = document.getElementById("destination_1_" + MapId);
-
     //we first delete what is currently in the div
     deleteContent(MapId);
 
@@ -44,12 +40,23 @@
       data: {mapid : MapId},
       success: function(data){
         var list_of_results = data["ctatt"]["eta"] ;
+        ConstructTable(list_of_results, MapId);
+      }
+    });
+  }
+
+
+  //FUNCTION TO CONSTRUCT PREDICTION
+      function ConstructTable(list_of_results, MapId){
         var train = new Array();
         var h6 = new Array ();
         var span = new Array();
         direction_1 = 0;
         direction_5 = 0;
         station_name = 0;
+        div_header = document.getElementById("header_" + MapId);
+        destination_5_div = document.getElementById("destination_5_" + MapId);
+        destination_1_div = document.getElementById("destination_1_" + MapId);
 
         for (i=0; i<list_of_results.length; i++) {
           train[i] = list_of_results[i];
@@ -122,5 +129,3 @@
           }
         }
       }
-    });
-  }

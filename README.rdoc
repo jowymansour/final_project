@@ -1,3 +1,8 @@
 HEROKU LINK
 
 ===> https://damp-dawn-2530.herokuapp.com/
+
+
+WARNING
+
+==> Need to use PostgreSQL in order to launch it on localhost (used it to push to Heroku & installed in in development as well to avoid error)

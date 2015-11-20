@@ -1,0 +1,15 @@
+<div class="panel" id="<%= station.MAP_ID %>">
+  <div class="panel-body">
+    <div class="panel-header" id="header_<%= station.MAP_ID %>"></div>
+    <div class="col-md-offset-1">
+      <div id="destination_1_<%= station.MAP_ID %>"></div>
+      <div id="destination_5_<%= station.MAP_ID %>"></div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'cta_schedule/TrainSpecific/train_schedule.js'  %>
+<script>
+  var TablePrediction = <%=raw @train_prediction.to_json %>;
+  ConstructTable(TablePrediction, <%= station.MAP_ID %>);
+</script>

@@ -1,1 +1,14 @@
-<h3> Not done yet </h3>
+<% if @error == 0 %>
+  <% if @type_transport == "SUBWAY" %>
+    <%= render partial: 'directions/train', :locals => {:train_prediction => @train_prediction, :station => @stop_db} %>
+  <% elsif @type_transport =="BUS" %>
+
+  <% else %>
+  <h3> <%= @message %> </h3>
+  <% end %>
+
+<% else %>
+  <h3> <%= @message %> </h3>
+<% end %>
+
+
