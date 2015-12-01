@@ -224,11 +224,10 @@ class CtaScheduleController < ApplicationController
       station_id = params[:station_id]
       type_transp = params[:type_transp]
       route_id = params[:route_id]
-      user_id = current_user.id
       url = params[:url]
 
       #We first look if we already added this station as favorite
-      @favorite = Favorite.where(:station_id => station_id, :user_id => user_id)
+      @favorite = current_user.favorites.where(:station_id => station_id)
 
       #If yes, we destroy it, if no we add it
       if @favorite.any?
@@ -237,7 +236,7 @@ class CtaScheduleController < ApplicationController
       else
         @add_favorite = Favorite.new
         @add_favorite.station_id = station_id
-        @add_favorite.user_id = user_id
+        @add_favorite.user_id = current_user.id
         @add_favorite.type_transp = type_transp
         @add_favorite.route_id = route_id
 
