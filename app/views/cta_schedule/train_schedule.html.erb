@@ -15,7 +15,7 @@
                 <div class="panel-body">
                   <i class="fa fa-heart favorite_box fa-lg <%= logged_in? ? train_favorite?(station) : '' %>" onclick="add_remove_Favorite(<%= station.MAP_ID %>, this, 'train', '<%= @line.route_id %>')"></i>
                   <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(<%= station.MAP_ID %>, '<%= @line.route_id %>')"></i>
-                  <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= station.MAP_ID %>)"></i>
+                  <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= station.MAP_ID %>, '<%= @line.route_id %>')"></i>
 
                   <div class="panel-header" id="header_<%= station.MAP_ID %>"></div>
                   <div class="col-md-offset-1">

@@ -26,7 +26,7 @@
                         <!-- All the icons -->
                       <i class="fa fa-heart favorite_box fa-lg <%= logged_in? ? bus_favorite?(station["stpid"]) : '' %>" onclick="add_remove_Favorite(<%= station["stpid"] %>, this, 'bus','<%= @line.route_id %>')"></i>
                       <i class="fa fa-times close_box fa-lg" onclick="ShowSchedule(<%= dirnb.to_s + station["stpid"] %>, <%= @line.route_id %>)"></i>
-                      <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= dirnb.to_s + station["stpid"] %>)"></i>
+                      <i class="fa fa-refresh refresh_box fa-lg" onclick="AjaxFetch(<%= dirnb.to_s + station["stpid"] %>, <%= @line.route_id %>)"></i>
 
                       <!-- The content - bus predictions -->
                       <div class="header_box" id="header_<%= dirnb.to_s + station["stpid"] %>"><%= station["stpnm"] %></div>
