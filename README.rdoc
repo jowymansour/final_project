@@ -1,9 +1,9 @@
-HEROKU LINK
+> HEROKU LINK
 
 https://ctascheduler.herokuapp.com/
 
 
-WARNING
+> WARNING - Read before installing!
 
 Need to use PostgreSQL in order to launch it on localhost (used it to push to Heroku & installed in in development as well to avoid error)
 
@@ -11,6 +11,4 @@ Need to use PostgreSQL in order to launch it on localhost (used it to push to He
 Commands to get going:
 
 - Bundle install
-- rake db:create
-- rake db:migrate
-- psql my_database_development < db/database_basic
+- rake db:setup (Will create, migrate and fill the database at the same time!)
