@@ -9,7 +9,7 @@ module CtaScheduleHelper
   end
 
   def bus_favorite?(stop_id)
-    @favorite = Favorite.where(station_id: stop_id)
+    @favorite = current_user.favorites.where(station_id: stop_id)
     if @favorite.first
       render :text => 'added_favorite'
     end

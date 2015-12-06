@@ -1,0 +1,679 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: favorites; Type: TABLE; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+CREATE TABLE favorites (
+    id integer NOT NULL,
+    type_transp character varying,
+    station_id character varying,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    route_id character varying
+);
+
+
+ALTER TABLE favorites OWNER TO jowymansour;
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE; Schema: public; Owner: jowymansour
+--
+
+CREATE SEQUENCE favorites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE favorites_id_seq OWNER TO jowymansour;
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jowymansour
+--
+
+ALTER SEQUENCE favorites_id_seq OWNED BY favorites.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE schema_migrations OWNER TO jowymansour;
+
+--
+-- Name: train_stops; Type: TABLE; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+CREATE TABLE train_stops (
+    id integer NOT NULL,
+    "STOP_ID" integer,
+    "DIRECTION_ID" character varying,
+    "STOP_NAME" character varying,
+    station_name character varying,
+    station_descriptive_name character varying,
+    "MAP_ID" character varying,
+    "ADA" boolean,
+    "Red" boolean,
+    "Blue" boolean,
+    "G" boolean,
+    "Brn" boolean,
+    "P" boolean,
+    "Pexp" boolean,
+    "Y" boolean,
+    "Pink" boolean,
+    "O" boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    "Location" character varying
+);
+
+
+ALTER TABLE train_stops OWNER TO jowymansour;
+
+--
+-- Name: train_stops_id_seq; Type: SEQUENCE; Schema: public; Owner: jowymansour
+--
+
+CREATE SEQUENCE train_stops_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE train_stops_id_seq OWNER TO jowymansour;
+
+--
+-- Name: train_stops_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jowymansour
+--
+
+ALTER SEQUENCE train_stops_id_seq OWNED BY train_stops.id;
+
+
+--
+-- Name: transportations; Type: TABLE; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+CREATE TABLE transportations (
+    id integer NOT NULL,
+    type character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    route_id character varying,
+    route_short_name character varying,
+    route_long_name character varying,
+    route_type integer,
+    route_url character varying,
+    route_color character varying,
+    route_text_color character varying
+);
+
+
+ALTER TABLE transportations OWNER TO jowymansour;
+
+--
+-- Name: transportations_id_seq; Type: SEQUENCE; Schema: public; Owner: jowymansour
+--
+
+CREATE SEQUENCE transportations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE transportations_id_seq OWNER TO jowymansour;
+
+--
+-- Name: transportations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jowymansour
+--
+
+ALTER SEQUENCE transportations_id_seq OWNED BY transportations.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    name character varying,
+    email character varying,
+    password_digest character varying,
+    rember_digest character varying,
+    provider character varying,
+    uid character varying,
+    oauth_token character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    oauth_expires_at timestamp without time zone
+);
+
+
+ALTER TABLE users OWNER TO jowymansour;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: jowymansour
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO jowymansour;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jowymansour
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: jowymansour
+--
+
+ALTER TABLE ONLY favorites ALTER COLUMN id SET DEFAULT nextval('favorites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: jowymansour
+--
+
+ALTER TABLE ONLY train_stops ALTER COLUMN id SET DEFAULT nextval('train_stops_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: jowymansour
+--
+
+ALTER TABLE ONLY transportations ALTER COLUMN id SET DEFAULT nextval('transportations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: jowymansour
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: jowymansour
+--
+
+COPY favorites (id, type_transp, station_id, user_id, created_at, updated_at, route_id) FROM stdin;
+20	train	41270	2	2015-11-12 03:20:44.236259	2015-11-12 03:20:44.236259	G
+21	train	41120	5	2015-11-06 20:01:53.079119	2015-11-06 20:01:53.079119	G
+10	bus	5037	3	2015-11-20 05:28:47.445288	2015-11-20 05:28:47.445288	6
+11	train	40700	3	2015-11-20 05:31:05.841088	2015-11-20 05:31:05.841088	G
+12	train	40680	3	2015-11-20 06:17:50.602889	2015-11-20 06:17:50.602889	G
+15	train	41050	3	2015-11-20 16:22:41.300552	2015-11-20 16:22:41.300552	P
+\.
+
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jowymansour
+--
+
+SELECT pg_catalog.setval('favorites_id_seq', 25, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: jowymansour
+--
+
+COPY schema_migrations (version) FROM stdin;
+20151106170409
+20151024001436
+20151024043704
+20151025221951
+20151025223845
+20151026005255
+20151026011852
+20151026025108
+20151026030204
+20151026031508
+20151026031749
+20151101190431
+20151101191217
+20151105024324
+20151105030138
+20151120145111
+20151120150752
+20151120163052
+20151120163630
+\.
+
+
+--
+-- Data for Name: train_stops; Type: TABLE DATA; Schema: public; Owner: jowymansour
+--
+
+COPY train_stops (id, "STOP_ID", "DIRECTION_ID", "STOP_NAME", station_name, station_descriptive_name, "MAP_ID", "ADA", "Red", "Blue", "G", "Brn", "P", "Pexp", "Y", "Pink", "O", created_at, updated_at, "Location") FROM stdin;
+299	30161	E	18th (Loop-bound)	18th	18th (Pink Line)	40830	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.224216	2015-10-30 14:41:47.224216	{41.857908;-87.669147}
+300	30022	N	35th/Archer (Loop-bound)	35th/Archer	35th/Archer (Orange Line)	40120	t	f	f	f	f	f	f	f	f	t	2015-10-30 14:41:47.238442	2015-10-30 14:41:47.238442	{41.829353;-87.680622}
+301	30213	N	35-Bronzeville-IIT (Harlem-bound)	35th-Bronzeville-IIT	35th-Bronzeville-IIT (Green Line)	41120	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.241591	2015-10-30 14:41:47.241591	{41.831677;-87.625826}
+302	30245	N	43rd (Harlem-bound)	43rd	43rd (Green Line)	41270	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.244636	2015-10-30 14:41:47.244636	{41.816462;-87.619021}
+303	30210	S	47th (63rd-bound)	47th	47th (Green Line)	41080	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.247963	2015-10-30 14:41:47.247963	{41.809209;-87.618826}
+304	30237	N	47th (Howard-bound)	47th	47th (Red Line)	41230	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.251265	2015-10-30 14:41:47.251265	{41.810318;-87.63094}
+305	30024	N	51st (Harlem-bound)	51st	51st (Green Line)	40130	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.254653	2015-10-30 14:41:47.254653	{41.80209;-87.618487}
+306	30113	E	54th/Cermak (Loop-bound)	54th/Cermak	54th/Cermak (Pink Line)	40580	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.258243	2015-10-30 14:41:47.258243	{41.85177331;-87.75669201}
+307	30177	N	63rd (Howard-bound)	63rd	63rd (Red Line)	40910	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.261412	2015-10-30 14:41:47.261412	{41.780536;-87.630952}
+308	30191	N	69th (Howard-bound)	69th	69th (Red Line)	40990	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.264614	2015-10-30 14:41:47.264614	{41.768367;-87.625724}
+309	30046	N	79th (Howard-bound)	79th	79th (Red Line)	40240	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.267761	2015-10-30 14:41:47.267761	{41.750419;-87.625112}
+310	30275	N	87th (Howard-bound)	87th	87th (Red Line)	41430	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.27213	2015-10-30 14:41:47.27213	{41.735372;-87.624717}
+311	30089	S	95th/Dan Ryan (95th-bound)	95th/Dan Ryan	95th/Dan Ryan (Red Line)	40450	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.276692	2015-10-30 14:41:47.276692	{41.722377;-87.624342}
+312	30132	S	Adams/Wabash (Inner Loop)	Adams/Wabash	Adams/Wabash (Brown	40680	f	f	f	t	f	f	t	f	t	t	2015-10-30 14:41:47.2807	2015-10-30 14:41:47.2807	{41.879507;-87.626037}
+313	30240	S	Addison (Forest Pk-bound)	Addison	Addison (Blue Line)	41240	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.283946	2015-10-30 14:41:47.283946	{41.94738;-87.71906}
+314	30277	N	Addison (Kimball-bound)	Addison	Addison (Brown Line)	41440	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.287272	2015-10-30 14:41:47.287272	{41.947028;-87.674642}
+315	30274	S	Addison (95th-bound)	Addison	Addison (Red Line)	41420	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.290484	2015-10-30 14:41:47.290484	{41.947428;-87.653626}
+316	30229	N	Argyle (Howard-bound)	Argyle	Argyle (Red Line)	41200	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.293804	2015-10-30 14:41:47.293804	{41.973453;-87.65853}
+317	30128	S	Armitage (Loop-bound)	Armitage	Armitage (Brown & Purple Lines)	40660	t	f	f	f	t	f	t	f	f	f	2015-10-30 14:41:47.297012	2015-10-30 14:41:47.297012	{41.918217;-87.652644}
+318	30205	N	Ashland (Loop-bound)	Ashland	Ashland (Orange Line)	41060	t	f	f	f	f	f	f	f	f	t	2015-10-30 14:41:47.299995	2015-10-30 14:41:47.299995	{41.839234;-87.665317}
+319	30033	E	Ashland (Loop-63rd-bound)	Ashland	Ashland (Green & Pink Lines)	40170	t	f	f	t	f	f	f	f	t	f	2015-10-30 14:41:47.303706	2015-10-30 14:41:47.303706	{41.885269;-87.666969}
+320	30057	W	Ashland/63rd (Terminal arrival)	Ashland/63rd	Ashland/63rd (Green Line)	40290	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.306843	2015-10-30 14:41:47.306843	{41.77886;-87.663766}
+321	30001	E	Austin (O'Hare-bound)	Austin	Austin (Blue Line)	40010	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.309842	2015-10-30 14:41:47.309842	{41.870851;-87.776812}
+322	30243	E	Austin (63rd-bound)	Austin	Austin (Green Line)	41260	f	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.313068	2015-10-30 14:41:47.313068	{41.887293;-87.774135}
+323	30258	S	Belmont (Loop-bound)	Belmont	Belmont (Red	41320	t	f	f	f	t	f	t	f	f	f	2015-10-30 14:41:47.316314	2015-10-30 14:41:47.316314	{41.939751;-87.65338}
+324	30013	S	Belmont (O'Hare Branch) (Forest Pk-bound)	Belmont	Belmont (Blue Line)	40060	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.319854	2015-10-30 14:41:47.319854	{41.938132;-87.712359}
+325	30067	S	Berwyn (95th-bound)	Berwyn	Berwyn (Red Line)	40340	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.323843	2015-10-30 14:41:47.323843	{41.977984;-87.658668}
+326	30267	N	Bryn Mawr (Howard-bound)	Bryn Mawr	Bryn Mawr (Red Line)	41380	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.327549	2015-10-30 14:41:47.327549	{41.983504;-87.65884}
+327	30086	E	California (Loop-bound)	California	California (Pink Line)	40440	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.331103	2015-10-30 14:41:47.331103	{41.854109;-87.694774}
+328	30111	N	California (O'Hare-bound)	California	California (Blue Line)	40570	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.334718	2015-10-30 14:41:47.334718	{41.921939;-87.69689}
+329	30266	W	California (Harlem-bound)	California	California (Green Line)	41360	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.338429	2015-10-30 14:41:47.338429	{41.88422;-87.696234}
+330	30242	S	Central (Howard-Loop-bound)	Central	Central (Purple Line)	41250	f	f	f	f	f	t	t	f	f	f	2015-10-30 14:41:47.341534	2015-10-30 14:41:47.341534	{42.063987;-87.685617}
+331	30055	W	Central (Harlem-bound)	Central	Central (Green Line)	40280	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.344946	2015-10-30 14:41:47.344946	{41.887389;-87.76565}
+332	30151	E	Central Park (Loop-bound)	Central Park	Central Park (Pink Line)	40780	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.348201	2015-10-30 14:41:47.348201	{41.853839;-87.714842}
+333	30194	S	Cermak-Chinatown (95th-bound)	Cermak-Chinatown	Cermak-Chinatown (Red Line)	41000	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.35123	2015-10-30 14:41:47.35123	{41.853206;-87.630968}
+334	30382	S	Cermak-McCormick Place (63rd-bound)	Cermak-McCormick Place	Cermak-McCormick Place (Green Line)	41690	t	\N	\N	t	\N	\N	\N	\N	\N	\N	2015-10-30 14:41:47.354114	2015-10-30 14:41:47.354114	{41.853115;-87.626402}
+335	30138	S	Chicago (Loop-bound)	Chicago	Chicago (Brown & Purple Lines)	40710	t	f	f	f	t	f	t	f	f	f	2015-10-30 14:41:47.357514	2015-10-30 14:41:47.357514	{41.89681;-87.635924}
+336	30271	N	Chicago (O'Hare-bound)	Chicago	Chicago (Blue Line)	41410	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.360832	2015-10-30 14:41:47.360832	{41.896075;-87.655214}
+337	30279	N	Chicago (Howard-bound)	Chicago	Chicago (Red Line)	41450	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.36394	2015-10-30 14:41:47.36394	{41.896671;-87.628176}
+338	30187	E	Cicero (O'Hare-bound)	Cicero	Cicero (Blue Line)	40970	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.366972	2015-10-30 14:41:47.366972	{41.871574;-87.745154}
+339	30083	W	Cicero (54th/Cermak-bound)	Cicero	Cicero (Pink Line)	40420	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.370598	2015-10-30 14:41:47.370598	{41.85182;-87.745336}
+340	30009	W	Cicero (Harlem-bound)	Cicero	Cicero (Green Line)	40480	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.373637	2015-10-30 14:41:47.373637	{41.886519;-87.744698}
+341	30122	S	Clark/Division (95th-bound)	Clark/Division	Clark/Division (Red Line)	40630	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.37676	2015-10-30 14:41:47.37676	{41.90392;-87.631412}
+343	30222	W	Clinton (Harlem-54th/Cermak-bound)	Clinton	Clinton (Green & Pink Lines)	41160	t	f	f	t	f	f	f	f	t	f	2015-10-30 14:41:47.383152	2015-10-30 14:41:47.383152	{41.885678;-87.641782}
+344	30085	W	Clinton (Forest Pk-bound)	Clinton	Clinton (Blue Line)	40430	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.386433	2015-10-30 14:41:47.386433	{41.875539;-87.640984}
+345	30291	E	Conservatory (63rd-bound)	Conservatory	Conservatory (Green Line)	41670	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.419434	2015-10-30 14:41:47.419434	{41.884904;-87.716523}
+346	30140	W	Cottage Grove (Harlem-bound)	Cottage Grove	Cottage Grove (Green Line)	40720	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.422627	2015-10-30 14:41:47.422627	{41.780309;-87.605857}
+347	30044	N	Cumberland (O'Hare-bound)	Cumberland	Cumberland (Blue Line)	40230	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.426144	2015-10-30 14:41:47.426144	{41.984246;-87.838028}
+348	30019	S	Damen (Loop-bound)	Damen	Damen (Brown Line)	40090	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.429544	2015-10-30 14:41:47.429544	{41.966286;-87.678639}
+349	30041	W	Damen (54th/Cermak-bound)	Damen	Damen (Pink Line)	40210	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.432832	2015-10-30 14:41:47.432832	{41.854517;-87.675975}
+350	30116	S	Damen/Milwaukee (Forest Pk-bound)	Damen	Damen (Blue Line)	40590	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.43624	2015-10-30 14:41:47.43624	{41.909744;-87.677437}
+351	30010	N	Davis (Linden-bound)	Davis	Davis (Purple Line)	40050	t	f	f	f	f	t	t	f	f	f	2015-10-30 14:41:47.440311	2015-10-30 14:41:47.440311	{42.04771;-87.683543}
+352	30133	N	Dempster (Linden-bound)	Dempster	Dempster (Purple Line)	40690	f	f	f	f	f	t	t	f	f	f	2015-10-30 14:41:47.443312	2015-10-30 14:41:47.443312	{42.041655;-87.681602}
+353	30026	N	Dempster-Skokie (Arrival)	Dempster-Skokie	Dempster-Skokie  (Yellow Line)	40140	t	f	f	f	f	f	f	t	f	f	2015-10-30 14:41:47.446325	2015-10-30 14:41:47.446325	{42.038951;-87.751919}
+354	30103	N	Diversey (Kimball-Linden-bound)	Diversey	Diversey (Brown & Purple Lines)	40530	t	f	f	f	t	f	t	f	f	f	2015-10-30 14:41:47.449678	2015-10-30 14:41:47.449678	{41.932732;-87.653131}
+355	30062	N	Division (O'Hare-bound)	Division	Division (Blue Line)	40320	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.45312	2015-10-30 14:41:47.45312	{41.903355;-87.666496}
+356	30077	W	Forest Park (Terminal Arrival)	Forest Park	Forest Park (Blue Line)	40390	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.456202	2015-10-30 14:41:47.456202	{41.874257;-87.817318}
+357	30101	N	Foster (Linden-bound)	Foster	Foster (Purple Line)	40520	f	f	f	f	f	t	t	f	f	f	2015-10-30 14:41:47.459324	2015-10-30 14:41:47.459324	{42.05416;-87.68356}
+358	30168	S	Francisco (Loop-bound)	Francisco	Francisco (Brown Line)	40870	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.462686	2015-10-30 14:41:47.462686	{41.966046;-87.701644}
+359	30234	S	Fullerton (95th-bound)	Fullerton	Fullerton (Red	41220	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.465849	2015-10-30 14:41:47.465849	{41.925051;-87.652866}
+360	30100	S	Garfield (63rd-bound)	Garfield	Garfield (Green Line)	40510	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.468879	2015-10-30 14:41:47.468879	{41.795172;-87.618327}
+361	30224	S	Garfield (95th-bound)	Garfield	Garfield (Red Line)	41170	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.472295	2015-10-30 14:41:47.472295	{41.79542;-87.631157}
+362	30096	S	Grand/Milwaukee (Forest Pk-bound)	Grand	Grand (Blue Line)	40490	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.475639	2015-10-30 14:41:47.475639	{41.891189;-87.647578}
+363	30064	N	Grand/State (Howard-bound)	Grand	Grand (Red Line)	40330	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.478795	2015-10-30 14:41:47.478795	{41.891665;-87.628021}
+364	30148	S	Granville (95th-bound)	Granville	Granville (Red Line)	40760	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.481718	2015-10-30 14:41:47.481718	{41.993664;-87.659202}
+365	30183	E	Halsted/63rd (Harlem-bound)	Halsted	Halsted (Green Line)	40940	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.485236	2015-10-30 14:41:47.485236	{41.778943;-87.644244}
+366	30216	S	Halsted (Midway-bound)	Halsted	Halsted (Orange Line)	41130	t	f	f	f	f	f	f	f	f	t	2015-10-30 14:41:47.488486	2015-10-30 14:41:47.488486	{41.84678;-87.648088}
+367	30189	E	Harlem (Forest Pk Branch) (O'Hare-bound)	Harlem	Harlem (Blue Line - Forest Park Branch)	40980	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.491578	2015-10-30 14:41:47.491578	{41.87349;-87.806961}
+368	30146	S	Harlem (O'Hare Branch) (Forest Pk-bound)	Harlem	Harlem (Blue Line - O'Hare Branch)	40750	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.494657	2015-10-30 14:41:47.494657	{41.98227;-87.8089}
+369	30003	E	Harlem (63rd-bound)	Harlem/Lake	Harlem/Lake (Green Line)	40020	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.497865	2015-10-30 14:41:47.497865	{41.886848;-87.803176}
+370	30165	E	H.W. Library (Outer Loop)	Harold Washington Library-State/Van Buren	Harold Washington Library-State/Van Buren (Brown	40850	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.50092	2015-10-30 14:41:47.50092	{41.876862;-87.628196}
+371	30286	S	Harrison (95th-bound)	Harrison	Harrison (Red Line)	41490	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.504057	2015-10-30 14:41:47.504057	{41.874039;-87.627479}
+372	30173	N	Howard (Terminal arrival)	Howard	Howard (Red	40900	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.507443	2015-10-30 14:41:47.507443	{42.019063;-87.672892}
+373	30157	E	Illinois Medical District (O'Hare-bound)	Illinois Medical District	Illinois Medical District (Blue Line)	40810	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.510466	2015-10-30 14:41:47.510466	{41.875706;-87.673932}
+374	30059	S	Indiana (63rd-bound)	Indiana	Indiana (Green Line)	40300	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.513616	2015-10-30 14:41:47.513616	{41.821732;-87.621371}
+375	30282	S	Irving Park (Loop-bound)	Irving Park	Irving Park (Brown Line)	41460	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.516696	2015-10-30 14:41:47.516696	{41.954521;-87.674868}
+376	30107	N	Irving Park (O'Hare Branch) (O'Hare-bound)	Irving Park	Irving Park (Blue Line)	40550	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.520121	2015-10-30 14:41:47.520121	{41.952925;-87.729229}
+377	30014	N	Jackson/Dearborn (O'Hare-bound)	Jackson	Jackson (Blue Line)	40070	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.523248	2015-10-30 14:41:47.523248	{41.878183;-87.629296}
+378	30110	S	Jackson/State (95th-bound)	Jackson	Jackson (Red Line)	40560	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.526235	2015-10-30 14:41:47.526235	{41.878153;-87.627596}
+379	30227	N	Jarvis (Howard-bound)	Jarvis	Jarvis (Red Line)	41190	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.529365	2015-10-30 14:41:47.529365	{42.015876;-87.669092}
+380	30247	N	Jefferson Park (O'Hare-bound)	Jefferson Park	Jefferson Park (Blue Line)	41280	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.533365	2015-10-30 14:41:47.533365	{41.970634;-87.760892}
+381	30226	S	Kedzie (Loop-bound)	Kedzie	Kedzie (Brown Line)	41180	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.537055	2015-10-30 14:41:47.537055	{41.965996;-87.708821}
+382	30219	N	Kedzie (Loop-bound)	Kedzie	Kedzie (Orange Line)	41150	t	f	f	f	f	f	f	f	f	t	2015-10-30 14:41:47.540388	2015-10-30 14:41:47.540388	{41.804236;-87.704406}
+383	30202	W	Kedzie (54th/Cermak-bound)	Kedzie	Kedzie (Pink Line)	41040	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.543614	2015-10-30 14:41:47.543614	{41.853964;-87.705408}
+384	30207	E	Kedzie (63rd-bound)	Kedzie	Kedzie (Green Line)	41070	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.54666	2015-10-30 14:41:47.54666	{41.884321;-87.706155}
+385	30049	W	Kedzie-Homan (Forest Pk-bound)	Kedzie-Homan	Kedzie-Homan (Blue Line)	40250	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.549699	2015-10-30 14:41:47.549699	{41.874341;-87.70604}
+386	30249	N	Kimball (Terminal arrival)	Kimball	Kimball (Brown Line)	41290	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.552924	2015-10-30 14:41:47.552924	{41.967901;-87.713065}
+387	30217	E	King Drive (Cottage Grove-bound)	King Drive	King Drive (Green Line)	41140	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.556112	2015-10-30 14:41:47.556112	{41.78013;-87.615546}
+388	30117	E	Kostner (Loop-bound)	Kostner	Kostner (Pink Line)	40600	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.559421	2015-10-30 14:41:47.559421	{41.853751;-87.733258}
+389	30290	S	Lake (95th-bound)	Lake	Lake (Red Line)	41660	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.562423	2015-10-30 14:41:47.562423	{41.884809;-87.627813}
+390	30135	E	Laramie (63rd-bound)	Laramie	Laramie (Green Line)	40700	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.56555	2015-10-30 14:41:47.56555	{41.887163;-87.754986}
+391	30262	W	LaSalle (Forest Pk-bound)	LaSalle	LaSalle (Blue Line)	41340	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.568868	2015-10-30 14:41:47.568868	{41.875568;-87.631722}
+392	30030	E	LaSalle/Van Buren (Outer Loop)	LaSalle/Van Buren	LaSalle/Van Buren (Brown	40160	f	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.572074	2015-10-30 14:41:47.572074	{41.8768;-87.631739}
+393	30149	N	Lawrence (Howard-bound)	Lawrence	Lawrence (Red Line)	40770	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.575159	2015-10-30 14:41:47.575159	{41.969139;-87.658493}
+394	30203	N	Linden (Linden-bound)	Linden	Linden (Purple Line)	41050	t	f	f	f	f	t	t	f	f	f	2015-10-30 14:41:47.578268	2015-10-30 14:41:47.578268	{42.073153;-87.69073}
+395	30197	N	Logan Square (O'Hare-bound)	Logan Square	Logan Square (Blue Line)	41020	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.58145	2015-10-30 14:41:47.58145	{41.929728;-87.708541}
+396	30251	N	Loyola (Howard-bound)	Loyola	Loyola (Red Line)	41300	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.584517	2015-10-30 14:41:47.584517	{42.001073;-87.661061}
+397	30052	N	Main (Linden-bound)	Main	Main (Purple Line)	40270	f	f	f	f	f	t	t	f	f	f	2015-10-30 14:41:47.587588	2015-10-30 14:41:47.587588	{42.033456;-87.679538}
+398	30091	S	Merchandise Mart (Loop-bound)	Merchandise Mart	Merchandise Mart (Brown & Purple Lines)	40460	t	f	f	f	t	f	t	f	f	f	2015-10-30 14:41:47.590749	2015-10-30 14:41:47.590749	{41.888969;-87.633924}
+399	30182	S	Midway (Arrival)	Midway	Midway (Orange Line)	40930	t	f	f	f	f	f	f	f	f	t	2015-10-30 14:41:47.593868	2015-10-30 14:41:47.593868	{41.78661;-87.737875}
+400	30153	N	Monroe (O'Hare-bound)	Monroe	Monroe (Blue Line)	40790	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.596951	2015-10-30 14:41:47.596951	{41.880703;-87.629378}
+401	30211	N	Monroe (Howard-bound)	Monroe	Monroe (Red Line)	41090	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.599944	2015-10-30 14:41:47.599944	{41.880745;-87.627696}
+402	30260	S	Montrose (Forest Pk-bound)	Montrose	Montrose (Blue Line)	41330	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.60323	2015-10-30 14:41:47.60323	{41.961539;-87.743574}
+403	30287	N	Montrose (Kimball-bound)	Montrose	Montrose (Brown Line)	41500	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.606332	2015-10-30 14:41:47.606332	{41.961756;-87.675047}
+404	30296	W	Morgan (Harlem-54th/Cermak-bound)	Morgan	Morgan (Green & Pink Lines)	41510	t	f	f	t	f	f	f	f	t	f	2015-10-30 14:41:47.609258	2015-10-30 14:41:47.609258	{41.885586;-87.652193}
+405	30020	N	Morse (Howard-bound)	Morse	Morse (Red Line)	40100	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.612494	2015-10-30 14:41:47.612494	{42.008362;-87.665909}
+406	30125	N	North/Clybourn (Howard-bound)	North/Clybourn	North/Clybourn (Red Line)	40650	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.615857	2015-10-30 14:41:47.615857	{41.910655;-87.649177}
+407	30079	S	Noyes (Howard-Loop-bound)	Noyes	Noyes (Purple Line)	40400	f	f	f	f	f	t	t	f	f	f	2015-10-30 14:41:47.618895	2015-10-30 14:41:47.618895	{42.058282;-87.683337}
+408	30263	E	Oak Park (63rd-bound)	Oak Park	Oak Park (Green Line)	41350	f	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.622279	2015-10-30 14:41:47.622279	{41.886988;-87.793783}
+409	30035	W	Oak Park (Forest Pk-bound)	Oak Park	Oak Park (Blue Line)	40180	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.625409	2015-10-30 14:41:47.625409	{41.872108;-87.791602}
+410	30298	S	Oakton-Skokie (Howard-bound)	Oakton-Skokie	Oakton-Skokie (Yellow Line)	41680	t	f	f	f	f	f	f	t	f	f	2015-10-30 14:41:47.628725	2015-10-30 14:41:47.628725	{42.02624348;-87.74722084}
+411	30172	S	O'Hare (Forest Pk-bound)	O'Hare	O'Hare (Blue Line)	40890	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.632337	2015-10-30 14:41:47.632337	{41.97766526;-87.90422307}
+412	30254	S	Paulina (Loop-bound)	Paulina	Paulina (Brown Line)	41310	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.635768	2015-10-30 14:41:47.635768	{41.943623;-87.670907}
+413	30200	W	Polk (54th/Cermak-bound)	Polk	Polk (Pink Line)	41030	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.640135	2015-10-30 14:41:47.640135	{41.871551;-87.66953}
+414	30028	E	Pulaski (Loop-bound)	Pulaski	Pulaski (Pink Line)	40150	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.643368	2015-10-30 14:41:47.643368	{41.853732;-87.724311}
+415	30185	N	Pulaski (Loop-bound)	Pulaski	Pulaski (Orange Line)	40960	t	f	f	f	f	f	f	f	f	t	2015-10-30 14:41:47.646582	2015-10-30 14:41:47.646582	{41.799756;-87.724493}
+416	30180	W	Pulaski (Forest Pk-bound)	Pulaski	Pulaski (Blue Line)	40920	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.649842	2015-10-30 14:41:47.649842	{41.873797;-87.725663}
+417	30005	E	Pulaski (63rd-bound)	Pulaski	Pulaski (Green Line)	40030	t	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.653008	2015-10-30 14:41:47.653008	{41.885412;-87.725404}
+418	30007	N	Quincy/Wells (Inner Loop)	Quincy/Wells	Quincy/Wells (Brown	40040	f	f	f	f	f	f	t	f	t	t	2015-10-30 14:41:47.656193	2015-10-30 14:41:47.656193	{41.878723;-87.63374}
+419	30093	W	Racine (Forest Pk-bound)	Racine	Racine (Blue Line)	40470	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.659267	2015-10-30 14:41:47.659267	{41.87592;-87.659458}
+420	30038	N	Randolph/Wabash (Outer Loop)	Randolph/Wabash	Randolph/Wabash (Brown	40200	f	f	f	t	t	f	f	f	f	f	2015-10-30 14:41:47.662498	2015-10-30 14:41:47.662498	{41.884431;-87.626149}
+421	30120	W	Ridgeland (Harlem-bound)	Ridgeland	Ridgeland (Green Line)	40610	f	f	f	t	f	f	f	f	f	f	2015-10-30 14:41:47.66569	2015-10-30 14:41:47.66569	{41.887159;-87.783661}
+422	30196	S	Rockwell (Loop-bound)	Rockwell	Rockwell (Brown Line)	41010	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.669009	2015-10-30 14:41:47.669009	{41.966115;-87.6941}
+423	30081	S	Roosevelt (Midway-63rd-bound)	Roosevelt	Roosevelt (Red	41400	t	f	f	t	f	f	f	f	f	t	2015-10-30 14:41:47.672232	2015-10-30 14:41:47.672232	{41.867405;-87.62659}
+424	30159	N	Rosemont (O'Hare-bound)	Rosemont	Rosemont (Blue Line)	40820	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.67545	2015-10-30 14:41:47.67545	{41.983507;-87.859388}
+425	30155	N	Sedgwick (Kimball-Linden-bound)	Sedgwick	Sedgwick (Brown & Purple Lines)	40800	t	f	f	f	t	f	t	f	f	f	2015-10-30 14:41:47.678585	2015-10-30 14:41:47.678585	{41.910409;-87.639302}
+426	30017	S	Sheridan (95th-bound)	Sheridan	Sheridan (Red Line)	40080	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.681612	2015-10-30 14:41:47.681612	{41.953775;-87.654929}
+427	30163	N	South Blvd (Linden-bound)	South Boulevard	South Boulevard (Purple Line)	40840	f	f	f	f	f	t	t	f	f	f	2015-10-30 14:41:47.68492	2015-10-30 14:41:47.68492	{42.027612;-87.678329}
+428	30070	N	Southport (Kimball-bound)	Southport	Southport (Brown Line)	40360	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.688593	2015-10-30 14:41:47.688593	{41.943744;-87.663619}
+429	30036	N	Sox-35th (Howard-bound)	Sox-35th	Sox-35th (Red Line)	40190	t	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.692016	2015-10-30 14:41:47.692016	{41.831191;-87.630636}
+430	30051	W	State/Lake (Outer Loop)	State/Lake	State/Lake (Brown	40260	f	f	f	t	t	f	f	f	f	f	2015-10-30 14:41:47.695251	2015-10-30 14:41:47.695251	{41.88574;-87.627835}
+431	30170	S	Thorndale (95th-bound)	Thorndale	Thorndale (Red Line)	40880	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.69866	2015-10-30 14:41:47.69866	{41.990259;-87.659076}
+432	30069	W	UIC-Halsted (Forest Pk-bound)	UIC-Halsted	UIC-Halsted (Blue Line)	40350	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.701897	2015-10-30 14:41:47.701897	{41.875474;-87.649707}
+433	30073	S	Washington (Forest Pk-bound)	Washington	Washington (Blue Line)	40370	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.705464	2015-10-30 14:41:47.705464	{41.883164;-87.62944}
+434	30141	N	Washington/Wells (Inner Loop)	Washington/Wells	Washington/Wells (Brown	40730	t	f	f	f	f	f	t	f	t	t	2015-10-30 14:41:47.709055	2015-10-30 14:41:47.709055	{41.882695;-87.63378}
+435	30231	N	Wellington (Kimball-Linden-bound)	Wellington	Wellington (Brown & Purple Lines)	41210	t	f	f	f	t	f	t	f	f	f	2015-10-30 14:41:47.71231	2015-10-30 14:41:47.71231	{41.936033;-87.653266}
+436	30129	N	Western (O'Hare Branch) (O'Hare-bound)	Western	Western (Blue Line - O'Hare Branch)	40670	t	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.716149	2015-10-30 14:41:47.716149	{41.916157;-87.687364}
+437	30284	S	Western (Loop-bound)	Western	Western (Brown Line)	41480	t	f	f	f	t	f	f	f	f	f	2015-10-30 14:41:47.721206	2015-10-30 14:41:47.721206	{41.966163;-87.688502}
+438	30143	E	Western (Loop-bound)	Western	Western (Pink Line)	40740	t	f	f	f	f	f	f	f	t	f	2015-10-30 14:41:47.726905	2015-10-30 14:41:47.726905	{41.854225;-87.685129}
+439	30061	S	Western (Midway-bound)	Western	Western (Orange Line)	40310	t	f	f	f	f	f	f	f	f	t	2015-10-30 14:41:47.731678	2015-10-30 14:41:47.731678	{41.804546;-87.684019}
+440	30042	E	Western (Forest Pk Branch) (O'Hare-bound)	Western	Western (Blue Line - Forest Park Branch)	40220	f	f	t	f	f	f	f	f	f	f	2015-10-30 14:41:47.735687	2015-10-30 14:41:47.735687	{41.875478;-87.688436}
+441	30106	S	Wilson (95th-bound)	Wilson	Wilson (Red Line)	40540	f	t	f	f	f	f	f	f	f	f	2015-10-30 14:41:47.740515	2015-10-30 14:41:47.740515	{41.964273;-87.657588}
+342	30074	E	Clark/Lake (Inner Loop)	Clark/Lake	Clark/Lake (Blue	40380	t	f	t	t	f	f	t	f	t	t	2015-10-30 14:41:47.379943	2015-11-20 15:18:53.311581	{41.885737;-87.630886}
+\.
+
+
+--
+-- Name: train_stops_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jowymansour
+--
+
+SELECT pg_catalog.setval('train_stops_id_seq', 1, false);
+
+
+--
+-- Data for Name: transportations; Type: TABLE DATA; Schema: public; Owner: jowymansour
+--
+
+COPY transportations (id, type, created_at, updated_at, route_id, route_short_name, route_long_name, route_type, route_url, route_color, route_text_color) FROM stdin;
+1	\N	2015-10-26 00:54:48.75238	2015-10-26 00:54:48.75238	1	1	Bronzeville/Union Station	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=158	\N	\N
+2	\N	2015-10-26 00:54:48.759188	2015-10-26 00:54:48.759188	2	2	Hyde Park Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=159	\N	\N
+3	\N	2015-10-26 00:54:48.762863	2015-10-26 00:54:48.762863	3	3	King Drive	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=160	\N	\N
+4	\N	2015-10-26 00:54:48.766321	2015-10-26 00:54:48.766321	4	4	Cottage Grove	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=162	\N	\N
+5	\N	2015-10-26 00:54:48.770143	2015-10-26 00:54:48.770143	5	5	South Shore Night Bus	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=164	\N	\N
+6	\N	2015-10-26 00:54:48.773655	2015-10-26 00:54:48.773655	6	6	Jackson Park Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=165	\N	\N
+7	\N	2015-10-26 00:54:48.778539	2015-10-26 00:54:48.778539	7	7	Harrison	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=166	\N	\N
+8	\N	2015-10-26 00:54:48.782921	2015-10-26 00:54:48.782921	8	8	Halsted	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=167	\N	\N
+9	\N	2015-10-26 00:54:48.787748	2015-10-26 00:54:48.787748	8A	8A	South Halsted	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=168	\N	\N
+10	\N	2015-10-26 00:54:48.793624	2015-10-26 00:54:48.793624	9	9	Ashland	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=169	\N	\N
+11	\N	2015-10-26 00:54:48.798576	2015-10-26 00:54:48.798576	10	10	Museum of S & I	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=171	\N	\N
+12	\N	2015-10-26 00:54:48.804573	2015-10-26 00:54:48.804573	11	11	Lincoln	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=172	\N	\N
+13	\N	2015-10-26 00:54:48.808355	2015-10-26 00:54:48.808355	12	12	Roosevelt	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=173	\N	\N
+14	\N	2015-10-26 00:54:48.812609	2015-10-26 00:54:48.812609	J14	J14	Jeffery Jump	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=174	\N	\N
+15	\N	2015-10-26 00:54:48.816353	2015-10-26 00:54:48.816353	15	15	Jeffery Local	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=175	\N	\N
+16	\N	2015-10-26 00:54:48.820379	2015-10-26 00:54:48.820379	18	18	16th-18th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=177	\N	\N
+17	\N	2015-10-26 00:54:48.824827	2015-10-26 00:54:48.824827	20	20	Madison	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=178	\N	\N
+18	\N	2015-10-26 00:54:48.828958	2015-10-26 00:54:48.828958	21	21	Cermak	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=180	\N	\N
+19	\N	2015-10-26 00:54:48.832644	2015-10-26 00:54:48.832644	22	22	Clark	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=181	\N	\N
+20	\N	2015-10-26 00:54:48.835972	2015-10-26 00:54:48.835972	24	24	Wentworth	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=182	\N	\N
+21	\N	2015-10-26 00:54:48.839183	2015-10-26 00:54:48.839183	26	26	South Shore Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=183	\N	\N
+22	\N	2015-10-26 00:54:48.842184	2015-10-26 00:54:48.842184	28	28	Stony Island	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=184	\N	\N
+23	\N	2015-10-26 00:54:48.846195	2015-10-26 00:54:48.846195	29	29	State	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=186	\N	\N
+24	\N	2015-10-26 00:54:48.850577	2015-10-26 00:54:48.850577	30	30	South Chicago	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=187	\N	\N
+25	\N	2015-10-26 00:54:48.854878	2015-10-26 00:54:48.854878	34	34	South Michigan	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=189	\N	\N
+26	\N	2015-10-26 00:54:48.861699	2015-10-26 00:54:48.861699	35	35	35th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=190	\N	\N
+27	\N	2015-10-26 00:54:48.868127	2015-10-26 00:54:48.868127	36	36	Broadway	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=191	\N	\N
+28	\N	2015-10-26 00:54:48.871803	2015-10-26 00:54:48.871803	37	37	Sedgwick	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=335	\N	\N
+29	\N	2015-10-26 00:54:48.875509	2015-10-26 00:54:48.875509	39	39	Pershing	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=193	\N	\N
+30	\N	2015-10-26 00:54:48.879543	2015-10-26 00:54:48.879543	43	43	43rd	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=194	\N	\N
+31	\N	2015-10-26 00:54:48.883001	2015-10-26 00:54:48.883001	44	44	Wallace-Racine	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=195	\N	\N
+32	\N	2015-10-26 00:54:48.886063	2015-10-26 00:54:48.886063	47	47	47th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=196	\N	\N
+33	\N	2015-10-26 00:54:48.888798	2015-10-26 00:54:48.888798	48	48	South Damen	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=197	\N	\N
+34	\N	2015-10-26 00:54:48.891478	2015-10-26 00:54:48.891478	49	49	Western	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=198	\N	\N
+35	\N	2015-10-26 00:54:48.894171	2015-10-26 00:54:48.894171	49B	49B	North Western	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=200	\N	\N
+36	\N	2015-10-26 00:54:48.897116	2015-10-26 00:54:48.897116	50	50	Damen	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=202	\N	\N
+37	\N	2015-10-26 00:54:48.899994	2015-10-26 00:54:48.899994	51	51	51st	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=203	\N	\N
+38	\N	2015-10-26 00:54:48.902784	2015-10-26 00:54:48.902784	52	52	Kedzie/California	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=204	\N	\N
+39	\N	2015-10-26 00:54:48.905572	2015-10-26 00:54:48.905572	52A	52A	South Kedzie	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=205	\N	\N
+40	\N	2015-10-26 00:54:48.908419	2015-10-26 00:54:48.908419	53	53	Pulaski	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=206	\N	\N
+41	\N	2015-10-26 00:54:48.911195	2015-10-26 00:54:48.911195	53A	53A	South Pulaski	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=207	\N	\N
+42	\N	2015-10-26 00:54:48.913928	2015-10-26 00:54:48.913928	54	54	Cicero	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=209	\N	\N
+43	\N	2015-10-26 00:54:48.916681	2015-10-26 00:54:48.916681	54A	54A	North Cicero/Skokie Blvd.	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=210	\N	\N
+44	\N	2015-10-26 00:54:48.919463	2015-10-26 00:54:48.919463	54B	54B	South Cicero	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=211	\N	\N
+45	\N	2015-10-26 00:54:48.922238	2015-10-26 00:54:48.922238	55	55	Garfield	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=213	\N	\N
+46	\N	2015-10-26 00:54:48.925316	2015-10-26 00:54:48.925316	55A	55A	55th/Austin	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=214	\N	\N
+47	\N	2015-10-26 00:54:48.928018	2015-10-26 00:54:48.928018	55N	55N	55th/Narragansett	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=215	\N	\N
+48	\N	2015-10-26 00:54:48.930873	2015-10-26 00:54:48.930873	56	56	Milwaukee	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=217	\N	\N
+49	\N	2015-10-26 00:54:48.933685	2015-10-26 00:54:48.933685	57	57	Laramie	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=219	\N	\N
+50	\N	2015-10-26 00:54:48.936195	2015-10-26 00:54:48.936195	59	59	59th/61st	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=220	\N	\N
+51	\N	2015-10-26 00:54:48.939001	2015-10-26 00:54:48.939001	60	60	Blue Island/26th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=221	\N	\N
+52	\N	2015-10-26 00:54:48.941904	2015-10-26 00:54:48.941904	62	62	Archer	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=222	\N	\N
+53	\N	2015-10-26 00:54:48.944857	2015-10-26 00:54:48.944857	62H	62H	Archer/Harlem	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=223	\N	\N
+54	\N	2015-10-26 00:54:48.94821	2015-10-26 00:54:48.94821	63	63	63rd	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=224	\N	\N
+55	\N	2015-10-26 00:54:48.951035	2015-10-26 00:54:48.951035	63W	63W	West 63rd	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=225	\N	\N
+56	\N	2015-10-26 00:54:48.953899	2015-10-26 00:54:48.953899	65	65	Grand	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=227	\N	\N
+57	\N	2015-10-26 00:54:48.956735	2015-10-26 00:54:48.956735	66	66	Chicago	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=228	\N	\N
+58	\N	2015-10-26 00:54:48.959754	2015-10-26 00:54:48.959754	67	67	67th-69th-71st	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=229	\N	\N
+59	\N	2015-10-26 00:54:48.962656	2015-10-26 00:54:48.962656	68	68	Northwest Highway	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=230	\N	\N
+60	\N	2015-10-26 00:54:48.966219	2015-10-26 00:54:48.966219	70	70	Division	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=232	\N	\N
+61	\N	2015-10-26 00:54:48.969404	2015-10-26 00:54:48.969404	71	71	71st South Shore	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=233	\N	\N
+62	\N	2015-10-26 00:54:48.972371	2015-10-26 00:54:48.972371	72	72	North	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=234	\N	\N
+63	\N	2015-10-26 00:54:48.975155	2015-10-26 00:54:48.975155	73	73	Armitage	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=235	\N	\N
+64	\N	2015-10-26 00:54:48.978817	2015-10-26 00:54:48.978817	74	74	Fullerton	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=236	\N	\N
+65	\N	2015-10-26 00:54:48.982303	2015-10-26 00:54:48.982303	75	75	74th-75th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=237	\N	\N
+66	\N	2015-10-26 00:54:48.985134	2015-10-26 00:54:48.985134	76	76	Diversey	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=238	\N	\N
+67	\N	2015-10-26 00:54:48.987918	2015-10-26 00:54:48.987918	77	77	Belmont	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=239	\N	\N
+68	\N	2015-10-26 00:54:48.991404	2015-10-26 00:54:48.991404	78	78	Montrose	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=240	\N	\N
+69	\N	2015-10-26 00:54:48.994627	2015-10-26 00:54:48.994627	79	79	79th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=241	\N	\N
+70	\N	2015-10-26 00:54:48.997878	2015-10-26 00:54:48.997878	80	80	Irving Park	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=242	\N	\N
+71	\N	2015-10-26 00:54:49.000956	2015-10-26 00:54:49.000956	81	81	Lawrence	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=244	\N	\N
+72	\N	2015-10-26 00:54:49.00384	2015-10-26 00:54:49.00384	81W	81W	West Lawrence	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=245	\N	\N
+73	\N	2015-10-26 00:54:49.006692	2015-10-26 00:54:49.006692	82	82	Kimball-Homan	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=246	\N	\N
+74	\N	2015-10-26 00:54:49.009349	2015-10-26 00:54:49.009349	84	84	Peterson	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=247	\N	\N
+75	\N	2015-10-26 00:54:49.012562	2015-10-26 00:54:49.012562	85	85	Central	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=248	\N	\N
+76	\N	2015-10-26 00:54:49.0157	2015-10-26 00:54:49.0157	85A	85A	North Central	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=249	\N	\N
+77	\N	2015-10-26 00:54:49.018559	2015-10-26 00:54:49.018559	86	86	Narragansett/Ridgeland	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=250	\N	\N
+78	\N	2015-10-26 00:54:49.021446	2015-10-26 00:54:49.021446	87	87	87th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=251	\N	\N
+79	\N	2015-10-26 00:54:49.02442	2015-10-26 00:54:49.02442	88	88	Higgins	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=252	\N	\N
+80	\N	2015-10-26 00:54:49.027245	2015-10-26 00:54:49.027245	90	90	Harlem	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=253	\N	\N
+81	\N	2015-10-26 00:54:49.030174	2015-10-26 00:54:49.030174	91	91	Austin	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=255	\N	\N
+82	\N	2015-10-26 00:54:49.035074	2015-10-26 00:54:49.035074	92	92	Foster	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=256	\N	\N
+83	\N	2015-10-26 00:54:49.038865	2015-10-26 00:54:49.038865	93	93	California/Dodge	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=257	\N	\N
+84	\N	2015-10-26 00:54:49.042816	2015-10-26 00:54:49.042816	94	94	South California	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=258	\N	\N
+85	\N	2015-10-26 00:54:49.046524	2015-10-26 00:54:49.046524	95E	95E	93rd-95th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=259	\N	\N
+86	\N	2015-10-26 00:54:49.049487	2015-10-26 00:54:49.049487	95W	95W	West 95th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=260	\N	\N
+87	\N	2015-10-26 00:54:49.052409	2015-10-26 00:54:49.052409	96	96	Lunt	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=261	\N	\N
+88	\N	2015-10-26 00:54:49.055172	2015-10-26 00:54:49.055172	97	97	Skokie	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=262	\N	\N
+89	\N	2015-10-26 00:54:49.058007	2015-10-26 00:54:49.058007	X98	X98	Avon Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=263	\N	\N
+90	\N	2015-10-26 00:54:49.061048	2015-10-26 00:54:49.061048	100	100	Jeffery Manor Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=264	\N	\N
+91	\N	2015-10-26 00:54:49.064624	2015-10-26 00:54:49.064624	103	103	West 103rd	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=265	\N	\N
+92	\N	2015-10-26 00:54:49.068233	2015-10-26 00:54:49.068233	106	106	East 103rd	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=266	\N	\N
+93	\N	2015-10-26 00:54:49.071256	2015-10-26 00:54:49.071256	108	108	Halsted/95th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=267	\N	\N
+94	\N	2015-10-26 00:54:49.073968	2015-10-26 00:54:49.073968	111	111	111th/King Drive	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=268	\N	\N
+95	\N	2015-10-26 00:54:49.076991	2015-10-26 00:54:49.076991	111A	111A	Pullman Shuttle	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=347	\N	\N
+96	\N	2015-10-26 00:54:49.081552	2015-10-26 00:54:49.081552	112	112	Vincennes/111th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=269	\N	\N
+97	\N	2015-10-26 00:54:49.085302	2015-10-26 00:54:49.085302	115	115	Pullman/115th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=336	\N	\N
+98	\N	2015-10-26 00:54:49.090728	2015-10-26 00:54:49.090728	119	119	Michigan/119th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=270	\N	\N
+99	\N	2015-10-26 00:54:49.095058	2015-10-26 00:54:49.095058	120	120	Ogilvie/Wacker Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=271	\N	\N
+100	\N	2015-10-26 00:54:49.098903	2015-10-26 00:54:49.098903	121	121	Union/Wacker Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=272	\N	\N
+101	\N	2015-10-26 00:54:49.101886	2015-10-26 00:54:49.101886	124	124	Navy Pier	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=275	\N	\N
+102	\N	2015-10-26 00:54:49.104892	2015-10-26 00:54:49.104892	125	125	Water Tower Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=276	\N	\N
+103	\N	2015-10-26 00:54:49.108454	2015-10-26 00:54:49.108454	126	126	Jackson	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=277	\N	\N
+104	\N	2015-10-26 00:54:49.111478	2015-10-26 00:54:49.111478	132	132	Goose Island Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=279	\N	\N
+105	\N	2015-10-26 00:54:49.114402	2015-10-26 00:54:49.114402	134	134	Stockton/LaSalle Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=280	\N	\N
+106	\N	2015-10-26 00:54:49.117249	2015-10-26 00:54:49.117249	135	135	Clarendon/LaSalle Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=281	\N	\N
+107	\N	2015-10-26 00:54:49.119916	2015-10-26 00:54:49.119916	136	136	Sheridan/LaSalle Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=282	\N	\N
+108	\N	2015-10-26 00:54:49.122735	2015-10-26 00:54:49.122735	143	143	Stockton/Michigan Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=283	\N	\N
+109	\N	2015-10-26 00:54:49.155185	2015-10-26 00:54:49.155185	146	146	Inner Drive/Michigan Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=286	\N	\N
+110	\N	2015-10-26 00:54:49.158338	2015-10-26 00:54:49.158338	147	147	Outer Drive Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=287	\N	\N
+111	\N	2015-10-26 00:54:49.161616	2015-10-26 00:54:49.161616	148	148	Clarendon Michigan Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=288	\N	\N
+112	\N	2015-10-26 00:54:49.165105	2015-10-26 00:54:49.165105	151	151	Sheridan	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=289	\N	\N
+113	\N	2015-10-26 00:54:49.168496	2015-10-26 00:54:49.168496	152	152	Addison	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=290	\N	\N
+114	\N	2015-10-26 00:54:49.171544	2015-10-26 00:54:49.171544	155	155	Devon	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=291	\N	\N
+115	\N	2015-10-26 00:54:49.174447	2015-10-26 00:54:49.174447	156	156	LaSalle	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=292	\N	\N
+116	\N	2015-10-26 00:54:49.177112	2015-10-26 00:54:49.177112	157	157	Streeterville/Taylor	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=293	\N	\N
+117	\N	2015-10-26 00:54:49.18033	2015-10-26 00:54:49.18033	165	165	West 65th	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=294	\N	\N
+118	\N	2015-10-26 00:54:49.18331	2015-10-26 00:54:49.18331	169	169	69th-UPS Express	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=296	\N	\N
+119	\N	2015-10-26 00:54:49.185914	2015-10-26 00:54:49.185914	170	170	U. of Chicago/Midway	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=297	\N	\N
+120	\N	2015-10-26 00:54:49.188798	2015-10-26 00:54:49.188798	171	171	U. of Chicago/Hyde Park	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=298	\N	\N
+121	\N	2015-10-26 00:54:49.191536	2015-10-26 00:54:49.191536	172	172	U. of Chicago/Kenwood	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=299	\N	\N
+122	\N	2015-10-26 00:54:49.194188	2015-10-26 00:54:49.194188	192	192	University of Chicago Hosp. Exp.	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=302	\N	\N
+123	\N	2015-10-26 00:54:49.197074	2015-10-26 00:54:49.197074	201	201	Central/Ridge	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=304	\N	\N
+124	\N	2015-10-26 00:54:49.199948	2015-10-26 00:54:49.199948	205	205	Chicago/Golf	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=305	\N	\N
+125	\N	2015-10-26 00:54:49.202793	2015-10-26 00:54:49.202793	206	206	Evanston Circulator	3	http://www.transitchicago.com/riding_cta/busroute.aspx?RouteId=306	\N	\N
+126	\N	2015-10-26 00:54:49.205805	2015-10-26 00:54:49.205805	Red	\N	Red Line	1	http://www.transitchicago.com/riding_cta/systemguide/redline.aspx	C60C30	FFFFFF
+127	\N	2015-10-26 00:54:49.208737	2015-10-26 00:54:49.208737	P	\N	Purple Line	1	http://www.transitchicago.com/riding_cta/systemguide/purpleline.aspx	522398	FFFFFF
+128	\N	2015-10-26 00:54:49.211706	2015-10-26 00:54:49.211706	Y	\N	Yellow Line	1	http://www.transitchicago.com/riding_cta/systemguide/yellowline.aspx	F9E300	0
+129	\N	2015-10-26 00:54:49.214544	2015-10-26 00:54:49.214544	Blue	\N	Blue Line	1	http://www.transitchicago.com/riding_cta/systemguide/blueline.aspx	00A1DE	FFFFFF
+131	\N	2015-10-26 00:54:49.221066	2015-10-26 00:54:49.221066	G	\N	Green Line	1	http://www.transitchicago.com/riding_cta/systemguide/greenline.aspx	009B3A	FFFFFF
+132	\N	2015-10-26 00:54:49.224553	2015-10-26 00:54:49.224553	Brn	\N	Brown Line	1	http://www.transitchicago.com/riding_cta/systemguide/brownline.aspx	62361B	FFFFFF
+133	\N	2015-10-26 00:54:49.228085	2015-10-26 00:54:49.228085	O	\N	Orange Line	1	http://www.transitchicago.com/riding_cta/systemguide/orangeline.aspx	F9461C	FFFFFF
+130	\N	2015-10-26 00:54:49.217566	2015-11-20 16:34:03.248769	Pink	\N	Pink Line	1	http://www.transitchicago.com/riding_cta/systemguide/pinkline.aspx	E27EA6	FFFFFF
+\.
+
+
+--
+-- Name: transportations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jowymansour
+--
+
+SELECT pg_catalog.setval('transportations_id_seq', 1, false);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: jowymansour
+--
+
+COPY users (id, name, email, password_digest, rember_digest, provider, uid, oauth_token, created_at, updated_at, oauth_expires_at) FROM stdin;
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jowymansour
+--
+
+SELECT pg_catalog.setval('users_id_seq', 1, false);
+
+
+--
+-- Name: favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+ALTER TABLE ONLY favorites
+    ADD CONSTRAINT favorites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: train_stops_pkey; Type: CONSTRAINT; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+ALTER TABLE ONLY train_stops
+    ADD CONSTRAINT train_stops_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: transportations_pkey; Type: CONSTRAINT; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+ALTER TABLE ONLY transportations
+    ADD CONSTRAINT transportations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_transportations_on_route_id; Type: INDEX; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+CREATE INDEX index_transportations_on_route_id ON transportations USING btree (route_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: jowymansour; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: jowymansour
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM jowymansour;
+GRANT ALL ON SCHEMA public TO jowymansour;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
