@@ -1,16 +1,16 @@
-<h3>HEROKU LINK</h3>
+HEROKU LINK
 
-===> https://ctascheduler.herokuapp.com/
+https://ctascheduler.herokuapp.com/
 
 
-<h3>WARNING</h3>
+WARNING
 
-==> Need to use PostgreSQL in order to launch it on localhost (used it to push to Heroku & installed in in development as well to avoid error)
+Need to use PostgreSQL in order to launch it on localhost (used it to push to Heroku & installed in in development as well to avoid error)
 
 
 Commands to get going:
 
-==> Bundle install
-==> rake db:create
-==> rake db:migrate
-==> psql my_database_development < db/database_basic
+- Bundle install
+- rake db:create
+- rake db:migrate
+- psql my_database_development < db/database_basic
