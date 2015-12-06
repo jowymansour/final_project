@@ -13,6 +13,6 @@ Commands to get going:
 - Bundle install
 - (rake db:drop only if database already exist!)
 - rake db:create
-- psql my_database_development < db/database_basic_backup
+- psql my_database_development < db/database_basic
 
 (If you have an error like "psql command not found" ==> http://postgresapp.com/documentation/cli-tools.html)
