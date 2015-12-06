@@ -11,6 +11,7 @@ Need to use PostgreSQL in order to launch it on localhost (used it to push to He
 Commands to get going:
 
 - Bundle install
+- (rake db:drop only if database already exist!)
 - rake db:create
 - psql my_database_development < db/database_basic_backup
 
