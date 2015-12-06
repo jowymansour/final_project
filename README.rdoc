@@ -3,7 +3,7 @@
 https://ctascheduler.herokuapp.com/
 
 
-> WARNING - Read before installing!
+> WARNING - IMPORTANT - Read before installing!
 
 Need to use PostgreSQL in order to launch it on localhost (used it to push to Heroku & installed in in development as well to avoid error)
 
@@ -11,4 +11,7 @@ Need to use PostgreSQL in order to launch it on localhost (used it to push to He
 Commands to get going:
 
 - Bundle install
-- rake db:setup (Will create, migrate and fill the database at the same time!)
+- rake db:create
+- psql my_database_development < db/database_basic_backup
+
+(If you have an error like "psql command not found" ==> http://postgresapp.com/documentation/cli-tools.html)
