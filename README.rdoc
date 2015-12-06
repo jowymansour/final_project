@@ -16,3 +16,5 @@ Commands to get going:
 - psql my_database_development < db/database_basic
 
 (If you have an error like "psql command not found" ==> http://postgresapp.com/documentation/cli-tools.html)
+
+The API of train or Bus are often down.. If it does not work, try again later, Thanks!
